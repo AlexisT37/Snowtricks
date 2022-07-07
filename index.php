@@ -9,6 +9,7 @@ include('includes/header.html');
 require_once __DIR__ . '/Person.php';
 $person = new Person('Zura', '28');
 echo "The person is " . $person->getName();
+echo "hello";
 
 // puts an image of a dog in the folder includes
 echo '<img src="includes/dog.jpg" alt="A cute dog" width="200" height="200">';
