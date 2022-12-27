@@ -1,0 +1,26 @@
+@startuml createTrick
+
+actor User
+actor Database
+
+usecase Controller
+
+' class Trick {
+'   name: string
+'   description: string
+'   group: string
+'   imageLink: string
+'   videoLink: string
+'   author: string
+'   dateOfCreation: date
+'   dateOfLastModified: date
+'   discussionChannel: string
+' }
+
+User -> Controller: Fills out form
+
+Controller --> Database: Set attributes \n and create entry
+
+Database --> User: Validation message
+
+@enduml

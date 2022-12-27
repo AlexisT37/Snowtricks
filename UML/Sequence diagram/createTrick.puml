@@ -1,0 +1,11 @@
+@startuml createTrick
+
+actor User
+
+participant Trick as T
+
+User -> T: create(name, description, group, imageLink, videoLink)
+
+T --> User: validation message
+
+@enduml

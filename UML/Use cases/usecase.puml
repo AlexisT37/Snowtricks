@@ -1,34 +1,22 @@
 @startuml usecase
 
-Actor User
+actor User
 
-UseCase "View Home Page" as UC1
-UseCase "Create Snowboard Trick" as UC2
-UseCase "View Snowboard Trick Details" as UC3
-UseCase "Edit Snowboard Trick" as UC4
-UseCase "Delete Snowboard Trick" as UC5
-UseCase "Post Message in Discussion Area" as UC6
-UseCase "View Messages in Discussion Area" as UC7
-UseCase "Login" as UC8
-UseCase "Register" as UC9
-UseCase "Forgot Password" as UC10
-UseCase "Reset Password" as UC11
 
-User -- UC1
-User -- UC2
-User -- UC3
-User -- UC4
-User -- UC5
-User -- UC6
-User -- UC7
-User -- UC8
-User -- UC9
-User -- UC10
-User -- UC11
+usecase "View Home Page" as UC1
+usecase "Create Snowboard Trick" as UC2
+usecase "View Snowboard Trick Details" as UC3
+usecase "Edit Snowboard Trick" as UC4
+usecase "Delete Snowboard Trick" as UC5
+usecase "Post Message in Discussion Area" as UC6
+usecase "View Messages in Discussion Area" as UC7
+usecase "Login" as UC8
+usecase "Register" as UC9
+usecase "Forgot Password" as UC10
+usecase "Reset Password" as UC11
 
-UC3 <-- UC8
-UC4 <-- UC8
-UC5 <-- UC8
-UC6 <-- UC8
+User -> UC1
+
+
 
 @enduml
