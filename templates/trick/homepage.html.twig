@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<h1>{{ title }}</h1>
+    <ul>
+        {% for trick in tricks %}
+            <li>
+                {{ trick.title }} - {{ trick.content }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
