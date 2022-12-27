@@ -3,13 +3,17 @@
 {% block title %} Une figure de snowboard | {{ parent() }}{% endblock %}
 
 {% block body %}
-<h1>{{ title }}</h1>
+    <h1>{{ title }}</h1>
+    <div class="mb-4 d-flex justify-content-between">
+        <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ path('register') }}" class="btn btn-secondary">Register</a>
+        <a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
+    </div>
     <ul>
         {% for trick in tricks %}
             <li>
-                {{ trick.title }} - {{ trick.content }}
+                {{ trick.name }} - {{ trick.description }}
             </li>
         {% endfor %}
     </ul>
 {% endblock %}
-
