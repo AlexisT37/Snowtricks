@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Trick;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,9 +44,18 @@ class TrickController extends AbstractController
     }
 
     #[Route('/create', name: 'create')]
-    public function create()
+    public function create(): Response
     {
-        
+        $trick = new Trick();
+        $trick->setName('Ninja Vanish');
+        $trick->setDescription('Stop the snowboard in a huge cloud of snow !');
+        $trick->setTrickgroup('Beginner');
+        $trick->setVideoLink('https://www.youtube.com/watch?v=QMrelVooJR4');
+        $trick->setImageLink('https://peakleaders.com/wp-content/uploads/2014/03/Ninja-Vanish.jpg');
+        $trick->setDiscussionChannel('ninja-vanish');
+
+        $entityManager->persist($mix);
+        $entityManager->flush();
 
         return new Response('create');
     }
