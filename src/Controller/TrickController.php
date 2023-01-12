@@ -5,11 +5,12 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Trick;
 use DateTimeImmutable;
+use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use function Symfony\Component\String\u;
 class TrickController extends AbstractController
 {
     #[Route('/')]
@@ -27,9 +28,16 @@ class TrickController extends AbstractController
     }
     
     #[Route('/browse/{slug}')]
-    public function browse($slug): Response
+    public function browse(TrickRepository $trickRepository, $slug=null): Response
     {
-        return new Response('Figure: '.$slug);
+        $group = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
+
+        $tricks = $trickRepository->findAll();
+
+        return $this->render('trick/browse.html.twig', [
+            'group' => $group,
+            'tricks' => $tricks,
+        ]);
     }
 
     #[Route('/login', name: 'login')]
