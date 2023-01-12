@@ -5,15 +5,18 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Trick;
 use DateTimeImmutable;
+use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use function Symfony\Component\String\u;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use function Symfony\Component\String\u;
+
 class TrickController extends AbstractController
 {
-    #[Route('/')]
+    #[Route('/', name: 'home')]
     public function homepage(TrickRepository $trickRepository): Response
     {
 
@@ -53,23 +56,21 @@ class TrickController extends AbstractController
     }
 
     #[Route('/create', name: 'create')]
-    public function create(EntityManagerInterface $entityManager): Response
+    public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $trick = new Trick();
-        $trick->setName('Ninja Vanish');
-        $trick->setDescription('Stop the snowboard in a huge cloud of snow !');
-        $trick->setTrickgroup('Beginner');
-        $trick->setVideoLink('https://www.youtube.com/watch?v=QMrelVooJR4');
-        $trick->setImageLink('https://peakleaders.com/wp-content/uploads/2014/03/Ninja-Vanish.jpg');
-        $trick->setDiscussionChannel('ninja-vanish');
-        $trick->setAuthor('Alexis');
-        $trick->setCreatedAt(new DateTimeImmutable());
-        $trick->setModifedAt(new DateTimeImmutable());
-        $trick->setDeleted(0);
-        
-        $entityManager->persist($trick);
-        $entityManager->flush();
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
 
-        return new Response('create');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($trick);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('trick/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

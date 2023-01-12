@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\TrickRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TrickRepository;
 
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
 class Trick
@@ -43,6 +44,15 @@ class Trick
 
     #[ORM\Column]
     private ?bool $deleted = null;
+
+    public function __construct()
+    {
+        $this->setAuthor('Alexon');
+        $this->setCreatedAt(new DateTimeImmutable());
+        $this->setModifedAt(new DateTimeImmutable());
+        $this->setDeleted(0);
+        $this->setDiscussionChannel('trick-ollie');
+    }
 
     public function getId(): ?int
     {
