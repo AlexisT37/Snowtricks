@@ -3,7 +3,6 @@
 {% block title %} Une figure de snowboard | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>{{ title }}</h1>
     <div class="mb-4 d-flex justify-content-between">
         <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
         <a href="{{ path('register') }}" class="btn btn-secondary">Register</a>
@@ -14,6 +13,7 @@
             <li>
                 {{ trick.name }} - {{ trick.description }}
             </li>
+            <img src="{{ trick.getImageLink(300) }}" alt="a trick image">
         {% endfor %}
     </ul>
 {% endblock %}

@@ -14,17 +14,15 @@ use function Symfony\Component\String\u;
 class TrickController extends AbstractController
 {
     #[Route('/')]
-    public function homepage(): Response
+    public function homepage(TrickRepository $trickRepository): Response
     {
 
-        $tricks = [
-            ['name' => 'Super flip', 'description' => 'This is a cool flip'],
-        ];
+        $tricks = $trickRepository->findAll();
 
         return $this->render('trick/homepage.html.twig', [
-            'title' => 'Snowtricks',
             'tricks' => $tricks,
         ]);
+        
     }
     
     #[Route('/browse/{slug}')]
