@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Trick;
-use DateTimeImmutable;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
