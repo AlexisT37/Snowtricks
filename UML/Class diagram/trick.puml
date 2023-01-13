@@ -1,6 +1,7 @@
 @startuml trick
 
 class Trick {
+  id: string
   name: string
   description: string
   group: string
@@ -10,9 +11,11 @@ class Trick {
   dateOfCreation: date
   dateOfLastModified: date
   discussionChannel: string
+  deleted: boolean
+   read(id: string): void
   create(name: string, description: string, group: string, imageLink: string, videoLink: string): void
-  modify(name: string, description: string, group: string, imageLink: string, videoLink: string): void
-  delete(): void
+  update(name: string, description: string, group: string, imageLink: string, videoLink: string): void
+  delete(id: string): void
 
 }
 
