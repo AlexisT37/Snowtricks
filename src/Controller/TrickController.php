@@ -42,7 +42,6 @@ class TrickController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(): Response
     {
-        echo 'login';
         return new Response('login');
     }
 
