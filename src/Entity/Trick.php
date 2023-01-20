@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TrickRepository;
@@ -47,6 +49,9 @@ class Trick
     #[ORM\Column]
     private ?bool $deleted = null;
 
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: ImageLink::class,cascade: ['persist'], orphanRemoval: true)]
+    private Collection $imageLinks;
+
     public function __construct()
     {
         $this->setAuthor('Alexon');
@@ -54,6 +59,7 @@ class Trick
         $this->setModifedAt(new DateTimeImmutable());
         $this->setDeleted(0);
         $this->setDiscussionChannel('trick-ollie');
+        $this->imageLinks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +183,36 @@ class Trick
     public function setDeleted(bool $deleted): self
     {
         $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImageLink>
+     */
+    public function getImageLinks(): Collection
+    {
+        return $this->imageLinks;
+    }
+
+    public function addImageLink(ImageLink $imageLink): self
+    {
+        if (!$this->imageLinks->contains($imageLink)) {
+            $this->imageLinks->add($imageLink);
+            $imageLink->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageLink(ImageLink $imageLink): self
+    {
+        if ($this->imageLinks->removeElement($imageLink)) {
+            // set the owning side to null (unless already changed)
+            if ($imageLink->getTrick() === $this) {
+                $imageLink->setTrick(null);
+            }
+        }
 
         return $this;
     }
