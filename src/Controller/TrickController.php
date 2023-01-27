@@ -26,16 +26,16 @@ class TrickController extends AbstractController
         
     }
     
-    #[Route('/browse/{slug}')]
-    public function browse(TrickRepository $trickRepository, $slug=null): Response
+    #[Route('/viewdetail/{slug}', name: 'viewdetail')]
+    public function viewdetail(TrickRepository $trickRepository, $slug): Response
     {
-        $group = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
+        $newSlug = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $tricks = $trickRepository->findAll();
+        $trick = $trickRepository->find($slug);
 
-        return $this->render('trick/browse.html.twig', [
-            'group' => $group,
-            'tricks' => $tricks,
+        return $this->render('trick/viewdetail.html.twig', [
+            'newSlug' => $newSlug,
+            'trick' => $trick,
         ]);
     }
 
