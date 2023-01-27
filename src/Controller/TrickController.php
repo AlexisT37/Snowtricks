@@ -29,12 +29,10 @@ class TrickController extends AbstractController
     #[Route('/viewdetail/{slug}', name: 'viewdetail')]
     public function viewdetail(TrickRepository $trickRepository, $slug): Response
     {
-        // $newSlug = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
-
-        $trick = $trickRepository->find($slug);
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+        
 
         return $this->render('trick/viewdetail.html.twig', [
-            'slug' => $slug,
             'trick' => $trick,
         ]);
     }
