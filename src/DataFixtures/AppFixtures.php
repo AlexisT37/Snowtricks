@@ -31,6 +31,7 @@ class AppFixtures extends Fixture
         $second->addImageLink($firstImageLink);
         $second->setVideoLink('https://www.youtube.com/watch?v=MAj_pzqmC4o');
         $second->setImageLink('');
+        // $second->setSlug('melon-sweet-second');
 
 
         $manager->persist($second);
