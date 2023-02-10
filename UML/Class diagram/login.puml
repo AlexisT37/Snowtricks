@@ -1,8 +1,0 @@
-@startuml login
-
-class User {
-  email: string
-  password: string
-}
-
-@enduml
