@@ -12,7 +12,7 @@ class HomeController extends AbstractController
 {
 
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function home(Request $request, EntityManagerInterface $entityManager): Response
     {
         return $this->render('home.html.twig');
