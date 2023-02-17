@@ -18,6 +18,19 @@ RUN xcaddy build \
 	--with github.com/dunglas/vulcain \
 	--with github.com/dunglas/vulcain/caddy
 
+# Build node assets	
+
+# node "stage"
+FROM node:16-alpine AS symfony_assets_builder
+WORKDIR /srv/app
+RUN mkdir public
+COPY package.json yarn.lock ./
+RUN yarn install
+
+COPY assets assets/
+COPY webpack.config.js ./
+
+RUN yarn build
 # Prod image
 FROM php:8.2-fpm-alpine AS app_php
 
@@ -124,10 +137,7 @@ RUN set -eux; \
 
 RUN rm -f .env.local.php
 
-# Install node
-FROM node:16-alpine
 
-RUN yarn
 
 # Caddy image
 FROM caddy:2.6-alpine AS app_caddy
@@ -139,3 +149,4 @@ COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
 
 
+COPY --from=symfony_assets_builder /srv/app/public/build public/build
