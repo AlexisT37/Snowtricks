@@ -15,7 +15,8 @@
         <h2>{{ trick.name }}</h2>
         <p>{{ trick.description }}</p>
         <p>{{ trick.slug }}</p>
-        <img src="{{ trick.getImageLink(300) }}" alt="a trick image">
+        {# <img src="{{ trick.getImageLink(300) }}" alt="a trick image"> #}
+        <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
             <iframe width="560" height="315" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
