@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TrickRepository;
+use Gedmo\Mapping\Annotation\Slug;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
@@ -47,13 +50,18 @@ class Trick
     #[ORM\Column]
     private ?bool $deleted = null;
 
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: ImageLink::class,cascade: ['persist'], orphanRemoval: true)]
+    private Collection $imageLinks;
+
+    #[ORM\Column(length: 100, unique: true)]
+    #[Slug(fields: ['name'])]
+    private ?string $slug = null;
+
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Comment::class)]
+    private Collection $comments;
+
     public function __construct()
     {
-        $this->setAuthor('Alexon');
-        $this->setCreatedAt(new DateTimeImmutable());
-        $this->setModifedAt(new DateTimeImmutable());
-        $this->setDeleted(0);
-        $this->setDiscussionChannel('trick-ollie');
     }
 
     public function getId(): ?int
@@ -177,6 +185,78 @@ class Trick
     public function setDeleted(bool $deleted): self
     {
         $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImageLink>
+     */
+    public function getImageLinks(): Collection
+    {
+        return $this->imageLinks;
+    }
+
+    public function addImageLink(ImageLink $imageLink): self
+    {
+        if (!$this->imageLinks->contains($imageLink)) {
+            $this->imageLinks->add($imageLink);
+            $imageLink->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageLink(ImageLink $imageLink): self
+    {
+        if ($this->imageLinks->removeElement($imageLink)) {
+            // set the owning side to null (unless already changed)
+            if ($imageLink->getTrick() === $this) {
+                $imageLink->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getTrick() === $this) {
+                $comment->setTrick(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,13 @@
+{# twig template with a form to add a comment #}
+{% extends 'base.html.twig' %}
+
+{% block title %} Une figure de snowboard | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+{# minimalistic form #}
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+{% endblock %}

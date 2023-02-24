@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Une figure de snowboard | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="mb-4 d-flex justify-content-between">
+        <a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+            <a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
+        {% endif %}
+    </div>
+    
+        <h2>{{ trick.name }}</h2>
+        <p>{{ trick.description }}</p>
+        <p>{{ trick.slug }}</p>
+        {# <img src="{{ trick.getImageLink(300) }}" alt="a trick image"> #}
+        <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
+            <iframe width="560" height="315" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+    {# Button to add a comment to the trick #}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
+    {% endif %}
+
+    {# Display all comments #}
+    <h3>Comments</h3>
+    {% for comment in trick.comments %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>{{ comment.content }}</p>
+                <p>by {{ comment.authorname.email}}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

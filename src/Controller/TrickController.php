@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use DateTimeImmutable;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use function Symfony\Component\String\u;
@@ -14,49 +17,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TrickController extends AbstractController
 {
-    #[Route('/', name: 'home')]
-    public function homepage(TrickRepository $trickRepository): Response
+    #[Route('/viewdetail/{slug}', name: 'viewdetail')]
+    public function viewdetail(TrickRepository $trickRepository, $slug): Response
     {
-
-        $tricks = $trickRepository->findAll();
-
-        return $this->render('trick/homepage.html.twig', [
-            'tricks' => $tricks,
-        ]);
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
         
-    }
-    
-    #[Route('/browse/{slug}')]
-    public function browse(TrickRepository $trickRepository, $slug=null): Response
-    {
-        $group = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $tricks = $trickRepository->findAll();
-
-        return $this->render('trick/browse.html.twig', [
-            'group' => $group,
-            'tricks' => $tricks,
+        return $this->render('trick/viewdetail.html.twig', [
+            'trick' => $trick,
         ]);
-    }
-
-    #[Route('/login', name: 'login')]
-    public function login(): Response
-    {
-        echo 'login';
-        return new Response('login');
-    }
-
-    #[Route('/register', name: 'register')]
-    public function register(): Response
-    {
-        echo 'register';
-        return new Response('register');
     }
 
     #[Route('/create', name: 'create')]
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $trick = new Trick();
+        $trick->setAuthor($this->getUser()->getUserIdentifier());
+        $trick->setCreatedAt(new DateTimeImmutable());
+        $trick->setModifedAt(new DateTimeImmutable());
+        $trick->setDeleted(0);
+        $trick->setDiscussionChannel('empty');
+
+
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
@@ -64,10 +46,33 @@ class TrickController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('trick/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    // function to add a comment to a trick, author of the comment will be the current user, the trick will be the trick where the comment is added
+    #[Route('/addcomment/{slug}', name: 'addcomment')]
+    public function addcomment(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+        $comment = new Comment();
+        $comment->setAuthorName($this->getUser());
+        $comment->setTrick($trick);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('viewdetail', ['slug' => $trick->getSlug()]);
+        }
+
+        return $this->render('trick/addcomment.html.twig', [
             'form' => $form->createView(),
         ]);
     }
