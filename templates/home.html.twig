@@ -8,6 +8,7 @@
     <h1>SnowTricks</h1>
 
 <div class="mb-4 d-flex justify-content-between">
+<a href="{{ path('app_home') }}">Home</a>
 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
     {# Display content for unauthenticated users #}
         <a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
@@ -27,6 +28,7 @@
                 {{ trick.name }} - {{ trick.description }}
             </li>
             <a href="{{ path('viewdetail', {'slug': trick.slug}) }}">See more</a>
+            <a href="{{ path('edit', {'slug': trick.slug}) }}">Edit Trick</a>
             <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
 
             <iframe width="560" height="315" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
