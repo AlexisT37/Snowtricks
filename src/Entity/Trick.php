@@ -62,13 +62,6 @@ class Trick
 
     public function __construct()
     {
-        $this->setAuthor('Alexon');
-        $this->setCreatedAt(new DateTimeImmutable());
-        $this->setModifedAt(new DateTimeImmutable());
-        $this->setDeleted(0);
-        $this->setDiscussionChannel('trick-ollie');
-        $this->imageLinks = new ArrayCollection();
-        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int

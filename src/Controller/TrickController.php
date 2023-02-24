@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\CommentType;
@@ -31,6 +32,13 @@ class TrickController extends AbstractController
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $trick = new Trick();
+        $trick->setAuthor($this->getUser()->getUserIdentifier());
+        $trick->setCreatedAt(new DateTimeImmutable());
+        $trick->setModifedAt(new DateTimeImmutable());
+        $trick->setDeleted(0);
+        $trick->setDiscussionChannel('empty');
+
+
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
