@@ -17,4 +17,21 @@
         <p>{{ trick.slug }}</p>
         <img src="{{ trick.getImageLink(300) }}" alt="a trick image">
             <iframe width="560" height="315" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+    {# Button to add a comment to the trick #}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
+    {% endif %}
+
+    {# Display all comments #}
+    <h3>Comments</h3>
+    {% for comment in trick.comments %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>{{ comment.content }}</p>
+                <p>by {{ comment.authorname.email}}</p>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

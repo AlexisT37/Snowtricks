@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
+use App\Entity\Comment;
 use App\Form\TrickType;
+use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use function Symfony\Component\String\u;
@@ -40,6 +42,29 @@ class TrickController extends AbstractController
         }
 
         return $this->render('trick/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    // function to add a comment to a trick, author of the comment will be the current user, the trick will be the trick where the comment is added
+    #[Route('/addcomment/{slug}', name: 'addcomment')]
+    public function addcomment(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+        $comment = new Comment();
+        $comment->setAuthorName($this->getUser());
+        $comment->setTrick($trick);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('viewdetail', ['slug' => $trick->getSlug()]);
+        }
+
+        return $this->render('trick/addcomment.html.twig', [
             'form' => $form->createView(),
         ]);
     }
