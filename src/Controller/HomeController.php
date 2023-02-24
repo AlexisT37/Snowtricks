@@ -27,17 +27,17 @@ class HomeController extends AbstractController
         $queryBuilder = $trickRepository->getAllTricksQueryBuilder();
         // create a new adapter to paginate the trick entities using the query builder
         $adapter = new QueryAdapter($queryBuilder);
-        // create a new pagerfanta instance with the adapter and the current page set to 1 and the max number of tricks per page set to 9
+        // create a new pagerfanta instance with the adapter and the current page set to 1 and the max number of tricks per page set to 5
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
-            1,
-            9
+            $request->query->get('page', 1),
+            5
         );
 
         // $tricks = $trickRepository->findAll();
 
         return $this->render('home.html.twig', [
-            'tricks' => $tricks,
+            // 'tricks' => $tricks,
             'pagerfanta' => $pagerfanta,
         ]);
         // return $this->render('home.html.twig');

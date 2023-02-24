@@ -40,7 +40,7 @@ class TrickRepository extends ServiceEntityRepository
         }
     }
 
-    private function getAllTricksQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    public function getAllTricksQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('trick');
         return $queryBuilder->orderBy('trick.createdAt', 'DESC');
