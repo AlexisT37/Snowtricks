@@ -54,6 +54,26 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // function to edit a trick, the trick will be the trick where the user is
+    #[Route('/edit/{slug}', name: 'edit')]
+    public function edit(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($trick);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('viewdetail', ['slug' => $trick->getSlug()]);
+        }
+
+        return $this->render('trick/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     // function to add a comment to a trick, author of the comment will be the current user, the trick will be the trick where the comment is added
     #[Route('/addcomment/{slug}', name: 'addcomment')]
     public function addcomment(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
@@ -76,4 +96,6 @@ class TrickController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 }
