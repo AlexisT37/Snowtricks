@@ -14,9 +14,10 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="_password">
 
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"> #}
-
         <button type="submit">login</button>
     </form>
+
+    {# button to reset the password #}
+    <a href="{{ path('app_reset_password') }}">Forgot your password?</a>
+
 {% endblock %}

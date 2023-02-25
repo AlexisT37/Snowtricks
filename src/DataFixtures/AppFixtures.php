@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
         $tricksix->setDescription('Method Grab is a trick that involves grabbing the heel edge of the board with the rear hand while the front leg is bent and the rear leg is extended.');
         $tricksix->setTrickgroup('Intermediate');
         $tricksix->setImageLink('https://miro.medium.com/max/1200/1*vV1tWalQFCyMhMPsSFwthA.jpeg');
-        $tricksix->setVideoLink('https://youtu.be/lunYxCQrs1E');
+        $tricksix->setVideoLink('https://www.youtube.com/watch?v=lunYxCQrs1E');
 
         $manager->persist($tricksix);
 
