@@ -96,5 +96,23 @@ class TrickController extends AbstractController
         ]);
     }
 
+    // function to delete a trick, the trick will be the trick where the user is and the user will be the current user
+    // the trick will be deleted but not removed from the database, deleted will be set to 1
+    // the trick can only be deleted if the user is the creator of the trick
+    #[Route('/delete/{slug}', name: 'delete')]
+    public function delete(TrickRepository $trickRepository, $slug, EntityManagerInterface $entityManager): Response
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+        if ($trick->getCreator() == $this->getUser()) {
+            $trick->setDeleted(1);
+            $entityManager->persist($trick);
+            $entityManager->flush();
+        } else {
+            $this->addFlash('error', 'You can only delete your own tricks !');
+        }
+
+        return $this->redirectToRoute('app_home');
+    }
+
 
 }

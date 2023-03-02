@@ -7,6 +7,17 @@
 
     <h1>SnowTricks</h1>
 
+    {# display flash messages here #}
+{% for type, messages in app.flashes %}
+	{% for message in messages %}
+		<div class="alert alert-{{ type }}" role="alert">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}
+
+
+
 <div class="mb-4 d-flex justify-content-between">
 <a href="{{ path('app_home') }}">Home</a>
 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -24,16 +35,32 @@
 
 <ul>
         {% for trick in pagerfanta %}
+        {# only show tricks where delete = 0 #}
+        {% if trick.deleted == 0 %}
             <a href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
             <li>
                {{ trick.description }} <p> Par {{ trick.creator.fullname }}</p>
             </li>
-            <a href="{{ path('edit', {'slug': trick.slug}) }}">Edit Trick</a>
+            <a href="{{ path('edit', {'slug': trick.slug}) }}"><ion-icon name="pencil-outline"></ion-icon></a>
+            
+            <a href="{{ path('delete', {'slug': trick.slug}) }}"><ion-icon name="trash-outline"></ion-icon></a>
+            
+            {# <a href="{{ path('delete', {'slug': trick.slug}) }}">Delete Trick</a> #}
             <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
 
             <iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% endif %}
         {% endfor %}
     </ul>
     {{ pagerfanta(pagerfanta) }}
 
+{% endblock %}
+{% block stylesheets %}
+    <!-- Font Awesome CSS -->
+    
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Font Awesome JS -->
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
 {% endblock %}
