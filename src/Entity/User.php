@@ -41,9 +41,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $fullname = null;
 
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Trick::class)]
+    private Collection $tricks;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->tricks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,6 +170,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFullname(string $fullname): self
     {
         $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Trick>
+     */
+    public function getTricks(): Collection
+    {
+        return $this->tricks;
+    }
+
+    public function addTrick(Trick $trick): self
+    {
+        if (!$this->tricks->contains($trick)) {
+            $this->tricks->add($trick);
+            $trick->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrick(Trick $trick): self
+    {
+        if ($this->tricks->removeElement($trick)) {
+            // set the owning side to null (unless already changed)
+            if ($trick->getCreator() === $this) {
+                $trick->setCreator(null);
+            }
+        }
 
         return $this;
     }

@@ -33,6 +33,7 @@ class TrickController extends AbstractController
     {
         $trick = new Trick();
         $trick->setAuthor($this->getUser()->getUserIdentifier());
+        $trick->setCreator($this->getUser());
         $trick->setCreatedAt(new DateTimeImmutable());
         $trick->setModifedAt(new DateTimeImmutable());
         $trick->setDeleted(0);

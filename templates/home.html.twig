@@ -24,10 +24,10 @@
 
 <ul>
         {% for trick in pagerfanta %}
+            <a href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
             <li>
-                {{ trick.name }} - {{ trick.description }}
+               {{ trick.description }} <p> Par {{ trick.creator.fullname }}</p>
             </li>
-            <a href="{{ path('viewdetail', {'slug': trick.slug}) }}">See more</a>
             <a href="{{ path('edit', {'slug': trick.slug}) }}">Edit Trick</a>
             <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
 
