@@ -38,6 +38,8 @@
 						Par
 						{{ trick.creator.fullname }}</p>
 				</li>
+				{# show below only if the user is the creator of the trick #}
+				{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
 				<a href="{{ path('edit', {'slug': trick.slug}) }}">
 					<ion-icon name="pencil-outline"></ion-icon>
 				</a>
@@ -45,6 +47,7 @@
 				<a href="{{ path('delete', {'slug': trick.slug}) }}">
 					<ion-icon name="trash-outline"></ion-icon>
 				</a>
+				{% endif %}
 
 				<img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
 
