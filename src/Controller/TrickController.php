@@ -9,7 +9,6 @@ use App\Form\TrickType;
 use App\Form\CommentType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use function Symfony\Component\String\u;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +31,7 @@ class TrickController extends AbstractController
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $trick = new Trick();
-        $trick->setAuthor($this->getUser()->getUserIdentifier());
+        $trick->setCreator($this->getUser());
         $trick->setCreatedAt(new DateTimeImmutable());
         $trick->setModifedAt(new DateTimeImmutable());
         $trick->setDeleted(0);
@@ -95,6 +94,24 @@ class TrickController extends AbstractController
         return $this->render('trick/addcomment.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    // function to delete a trick, the trick will be the trick where the user is and the user will be the current user
+    // the trick will be deleted but not removed from the database, deleted will be set to 1
+    // the trick can only be deleted if the user is the creator of the trick
+    #[Route('/delete/{slug}', name: 'delete')]
+    public function delete(TrickRepository $trickRepository, $slug, EntityManagerInterface $entityManager): Response
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $slug]);
+        if ($trick->getCreator() == $this->getUser()) {
+            $trick->setDeleted(1);
+            $entityManager->persist($trick);
+            $entityManager->flush();
+        } else {
+            $this->addFlash('error', 'You can only delete your own tricks !');
+        }
+
+        return $this->redirectToRoute('app_home');
     }
 
 
