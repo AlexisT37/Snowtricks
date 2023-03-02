@@ -38,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'authorName', targetEntity: Comment::class)]
     private Collection $comments;
 
+    #[ORM\Column(length: 255)]
+    private ?string $fullname = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -151,6 +154,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setAuthorName(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->fullname;
+    }
+
+    public function setFullname(string $fullname): self
+    {
+        $this->fullname = $fullname;
 
         return $this;
     }
