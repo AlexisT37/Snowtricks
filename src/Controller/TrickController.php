@@ -58,19 +58,24 @@ class TrickController extends AbstractController
     public function edit(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
-        $form = $this->createForm(TrickType::class, $trick);
-        $form->handleRequest($request);
+        if ($trick->getCreator() == $this->getUser()) {
+            $form = $this->createForm(TrickType::class, $trick);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($trick);
-            $entityManager->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($trick);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('viewdetail', ['slug' => $trick->getSlug()]);
+                return $this->redirectToRoute('viewdetail', ['slug' => $trick->getSlug()]);
+            }
+
+            return $this->render('trick/edit.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $this->addFlash('error', 'You can only edit your own tricks !');
+            return $this->redirectToRoute('app_home');
         }
-
-        return $this->render('trick/edit.html.twig', [
-            'form' => $form->createView(),
-        ]);
     }
 
     // function to add a comment to a trick, author of the comment will be the current user, the trick will be the trick where the comment is added
