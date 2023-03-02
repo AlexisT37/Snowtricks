@@ -35,9 +35,6 @@ class Trick
     #[ORM\Column(length: 255)]
     private ?string $videoLink = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $author = null;
-
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -129,18 +126,6 @@ class Trick
     public function setVideoLink(string $videoLink): self
     {
         $this->videoLink = $videoLink;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }

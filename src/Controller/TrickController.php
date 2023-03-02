@@ -32,7 +32,6 @@ class TrickController extends AbstractController
     public function create(EntityManagerInterface $entityManager, Request $request): Response
     {
         $trick = new Trick();
-        $trick->setAuthor($this->getUser()->getUserIdentifier());
         $trick->setCreator($this->getUser());
         $trick->setCreatedAt(new DateTimeImmutable());
         $trick->setModifedAt(new DateTimeImmutable());
