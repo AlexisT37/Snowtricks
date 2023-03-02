@@ -1,66 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home
+{% endblock %}
 
 {% block body %}
-   
-
-    <h1>SnowTricks</h1>
-
-    {# display flash messages here #}
-{% for type, messages in app.flashes %}
-	{% for message in messages %}
-		<div class="alert alert-{{ type }}" role="alert">
-			{{ message }}
-		</div>
+	<h1>SnowTricks</h1>
+	{% for type, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ type }}" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
 	{% endfor %}
-{% endfor %}
 
 
+	<div class="mb-4 d-flex justify-content-between">
+		<a href="{{ path('app_home') }}">Home</a>
+		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
+			<a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
+		{% endif %}
 
-<div class="mb-4 d-flex justify-content-between">
-<a href="{{ path('app_home') }}">Home</a>
-{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-    {# Display content for unauthenticated users #}
-        <a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
-        <a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
-{% endif %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+			<a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
+		{% endif %}
+	</div>
 
-            <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
-            <a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
-        {% endif %}
-    </div>
+	<ul>
+		{% for trick in pagerfanta %}
+			{% if trick.deleted == 0 %}
+				<a href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
+				<li>
+					{{ trick.description }}
+					<p>
+						Par
+						{{ trick.creator.fullname }}</p>
+				</li>
+				<a href="{{ path('edit', {'slug': trick.slug}) }}">
+					<ion-icon name="pencil-outline"></ion-icon>
+				</a>
 
-<ul>
-        {% for trick in pagerfanta %}
-        {# only show tricks where delete = 0 #}
-        {% if trick.deleted == 0 %}
-            <a href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
-            <li>
-               {{ trick.description }} <p> Par {{ trick.creator.fullname }}</p>
-            </li>
-            <a href="{{ path('edit', {'slug': trick.slug}) }}"><ion-icon name="pencil-outline"></ion-icon></a>
-            
-            <a href="{{ path('delete', {'slug': trick.slug}) }}"><ion-icon name="trash-outline"></ion-icon></a>
-            
-            {# <a href="{{ path('delete', {'slug': trick.slug}) }}">Delete Trick</a> #}
-            <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
+				<a href="{{ path('delete', {'slug': trick.slug}) }}">
+					<ion-icon name="trash-outline"></ion-icon>
+				</a>
 
-            <iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        {% endif %}
-        {% endfor %}
-    </ul>
-    {{ pagerfanta(pagerfanta) }}
+				<img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
 
-{% endblock %}
-{% block stylesheets %}
-    <!-- Font Awesome CSS -->
-    
+				<iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			{% endif %}
+		{% endfor %}
+	</ul>
+	{{ pagerfanta(pagerfanta) }}
+
 {% endblock %}
 
 {% block javascripts %}
-    <!-- Font Awesome JS -->
-    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+	<script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
 {% endblock %}
