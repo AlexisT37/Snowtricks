@@ -50,12 +50,6 @@
 		{% for trick in pagerfanta %}
 			{% if trick.deleted == 0 %}
 				<a href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
-				<li>
-					{{ trick.description }}
-					<p>
-						Par
-						{{ trick.creator.fullname }}</p>
-				</li>
 				{# show below only if the user is the creator of the trick #}
 				{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
 				<a href="{{ path('edit', {'slug': trick.slug}) }}">
@@ -76,6 +70,10 @@
 				{% endif %}
 
 			{% endif %}
+			</br>
+			</br>
+			</br>
+
 		{% endfor %}
 	</ul>
 	{{ pagerfanta(pagerfanta) }}
