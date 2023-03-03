@@ -31,7 +31,7 @@ class HomeController extends AbstractController
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
             $request->query->get('page', 1),
-            5
+            10
         );
 
         // $tricks = $trickRepository->findAll();
