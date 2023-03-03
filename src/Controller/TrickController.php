@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use App\Form\TrickType;
 use App\Form\CommentType;
 use App\Repository\TrickRepository;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +18,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TrickController extends AbstractController
 {
     #[Route('/viewdetail/{slug}', name: 'viewdetail')]
-    public function viewdetail(TrickRepository $trickRepository, $slug): Response
+    public function viewdetail(Trick $trick, Request $request, TrickRepository $trickRepository): Response
     {
-        $trick = $trickRepository->findOneBy(['slug' => $slug]);
-        
+        $comments = $trick->getComments();
+        $comments = $comments->getValues();
+        // sort the comments by date from the newest to the oldest
+        // using the usort function and a callback function that compares the dates of creation
+        // it progressively, from the first to the last element, compares the dates of creation of two consecutive comments
+
+        usort($comments, function ($a, $b) {
+            return $a->getCreatedAt() < $b->getCreatedAt();
+        });
+        $adapter = new ArrayAdapter($comments);
+        $pagerfanta = new \Pagerfanta\Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(5);
+        $pagerfanta->setCurrentPage($request->query->get('page', 1));
+        $comments = $pagerfanta->getCurrentPageResults();
 
         return $this->render('trick/viewdetail.html.twig', [
             'trick' => $trick,
+            'comments' => $comments,
+            'pagerfanta' => $pagerfanta,
         ]);
     }
 
@@ -54,7 +69,6 @@ class TrickController extends AbstractController
         ]);
     }
 
-    // function to edit a trick, the trick will be the trick where the user is
     #[Route('/edit/{slug}', name: 'edit')]
     public function edit(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +93,6 @@ class TrickController extends AbstractController
         }
     }
 
-    // function to add a comment to a trick, author of the comment will be the current user, the trick will be the trick where the comment is added
     #[Route('/addcomment/{slug}', name: 'addcomment')]
     public function addcomment(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -102,9 +115,6 @@ class TrickController extends AbstractController
         ]);
     }
 
-    // function to delete a trick, the trick will be the trick where the user is and the user will be the current user
-    // the trick will be deleted but not removed from the database, deleted will be set to 1
-    // the trick can only be deleted if the user is the creator of the trick
     #[Route('/delete/{slug}', name: 'delete')]
     public function delete(TrickRepository $trickRepository, $slug, EntityManagerInterface $entityManager): Response
     {
@@ -119,6 +129,4 @@ class TrickController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
-
-
 }
