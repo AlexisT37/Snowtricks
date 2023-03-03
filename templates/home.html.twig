@@ -5,6 +5,20 @@
 
 {% block body %}
 	<h1>SnowTricks</h1>
+
+	{# p that says hello, full username, you verified, and prints the verified variable #}
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<p>Hello {{ app.user.fullname }}, you are logged in!</p>
+		{% if app.user.verified == 1 %}
+			<p>You are verified</p>
+		{% else %}
+			<p>You are not verified</p>
+		{% endif %}
+		{% else %}
+		<p>You are not logged in, hello random user !</p>
+	{% endif %}
+
+	{# flashes #}
 	{% for type, messages in app.flashes %}
 		{% for message in messages %}
 			<div class="alert alert-{{ type }}" role="alert">
@@ -24,7 +38,11 @@
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 			<a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+			{% if app.user.verified == 1 %}
 			<a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
+			{% else %}
+			<p>You are not verified, you can't create a trick, check your email !</p>
+			{% endif %}
 		{% endif %}
 	</div>
 
