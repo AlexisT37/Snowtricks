@@ -34,13 +34,10 @@ class HomeController extends AbstractController
             10
         );
 
-        // $tricks = $trickRepository->findAll();
 
         return $this->render('home.html.twig', [
-            // 'tricks' => $tricks,
             'pagerfanta' => $pagerfanta,
         ]);
-        // return $this->render('home.html.twig');
     }
 
     

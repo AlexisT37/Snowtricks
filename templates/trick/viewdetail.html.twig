@@ -1,62 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Une figure de snowboard | {{ parent() }}{% endblock %}
+{% block title %}
+	Une figure de snowboard |
+	{{ parent() }}
+{% endblock %}
 
 {% block body %}
-<div class="mb-4 d-flex justify-content-between">
-<a href="{{ path('app_home') }}">Home</a>
-	{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-		{# Display content for unauthenticated users #}
-		<a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
-		<a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
+	<div class="mb-4 d-flex justify-content-between">
+		<a href="{{ path('app_home') }}">Home</a>
+		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+			{# Display content for unauthenticated users #}
+			<a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
+			<a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
+		{% endif %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+			<a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
+		{% endif %}
+	</div>
+
+
+	<h2>{{ trick.name }}</h2>
+	<p>{{ trick.description }}</p>
+	<p>{{ trick.slug }}</p>
+	<p>
+		Par
+		{{ trick.creator.fullname }}</p>
+	<img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
+
+	{% if trick.getVideoLink() is defined and 'youtube' in trick.getVideoLink() and 'youtu.be' not in trick.getVideoLink() %}
+		<iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	{% else %}
+		<p>There is no video for this trick</p>
 	{% endif %}
+
+	{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
+		{% if app.user.verified == 1 %}
+			<a href="{{ path('edit', {'slug': trick.slug}) }}">
+				<ion-icon name="pencil-outline"></ion-icon>
+			</a>
+
+			<a href="{{ path('delete', {'slug': trick.slug}) }}">
+				<ion-icon name="trash-outline"></ion-icon>
+			</a>
+		{% else %}
+			<p>Your account is not active so you cannot edit or delete your tricks !</p>
+		{% endif %}
+	{% endif %}
+
+	{# Button to add a comment to the trick #}
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		<a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
-		<a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
+		{% if app.user.verified == 1 %}
+			<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
+		{% else %}
+			<p>You need to verify your account to add a comment</p>
+		{% endif %}
 	{% endif %}
-</div>
 
-    
-        <h2>{{ trick.name }}</h2>
-        <p>{{ trick.description }}</p>
-        <p>{{ trick.slug }}</p>
-        <p> Par {{ trick.creator.fullname }}</p>
-        <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
-
-{% if trick.getVideoLink() is defined and 'youtube' in trick.getVideoLink() and 'youtu.be' not in trick.getVideoLink() %}
-	<iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    {% else %}
-    <p>There is no video for this trick</p>
-{% endif %}
-
-{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
-				<a href="{{ path('edit', {'slug': trick.slug}) }}">
-					<ion-icon name="pencil-outline"></ion-icon>
-				</a>
-
-				<a href="{{ path('delete', {'slug': trick.slug}) }}">
-					<ion-icon name="trash-outline"></ion-icon>
-				</a>
-				{% endif %}
-
-    {# Button to add a comment to the trick #}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
-    {% endif %}
-
-    {# Display all comments #}
-    <h3>Comments</h3>
-    {% for comment in trick.comments %}
-        <div class="card mb-2">
-            <div class="card-body">
-                <p>{{ comment.content }}</p>
-                <p>by {{ comment.authorname.fullname}}</p>
-                <img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="70" height="70">
-            </div>
-        </div>
-    {% endfor %}
+	{# Display all comments #}
+	<h3>Comments</h3>
+	{% for comment in trick.comments %}
+		<div class="card mb-2">
+			<div class="card-body">
+				<p>{{ comment.content }}</p>
+				<p>by
+					{{ comment.authorname.fullname}}</p>
+				<img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="70" height="70">
+			</div>
+		</div>
+	{% endfor %}
 {% endblock %}
 
 {% block javascripts %}
 	<script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
 {% endblock %}
+
