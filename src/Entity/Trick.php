@@ -39,7 +39,7 @@ class Trick
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $modifedAt = null;
+    private ?\DateTimeImmutable $modifiedAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $discussionChannel = null;
@@ -142,14 +142,14 @@ class Trick
         return $this;
     }
 
-    public function getModifedAt(): ?\DateTimeImmutable
+    public function getmodifiedAt(): ?\DateTimeImmutable
     {
-        return $this->modifedAt;
+        return $this->modifiedAt;
     }
 
-    public function setModifedAt(\DateTimeImmutable $modifedAt): self
+    public function setmodifiedAt(\DateTimeImmutable $modifiedAt): self
     {
-        $this->modifedAt = $modifedAt;
+        $this->modifiedAt = $modifiedAt;
 
         return $this;
     }

@@ -48,7 +48,7 @@ class AppFixtures extends Fixture
         $trick->setImageLink('https://snowboardingprofiles.com/wp-content/uploads/2015/07/how-to-do-an-ollie-on-a-snowboard.jpg');
         $trick->setVideoLink('https://www.youtube.com/watch?v=kOyCsY4rBH0');
         $trick->setCreatedAt(new DateTimeImmutable());
-        $trick->setModifedAt(new DateTimeImmutable());
+        $trick->setmodifiedAt(new DateTimeImmutable());
         $trick->setDeleted(0);
         $trick->setDiscussionChannel('empty');
         
@@ -64,7 +64,7 @@ class AppFixtures extends Fixture
         $trickdos->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
         $trickdos->setVideoLink('https://www.youtube.com/watch?v=MAj_pzqmC4o');
         $trickdos->setCreatedAt(new DateTimeImmutable());
-        $trickdos->setModifedAt(new DateTimeImmutable());
+        $trickdos->setmodifiedAt(new DateTimeImmutable());
         $trickdos->setDeleted(0);
         $trickdos->setDiscussionChannel('empty');
         
@@ -80,7 +80,7 @@ class AppFixtures extends Fixture
         $tricktres->setImageLink('https://media.istockphoto.com/id/165635215/vector/snowboarder-jumping.jpg?s=612x612&w=0&k=20&c=QbAL8KNH6Y4q-MxAmlQKTpJsoGghZVYdeGZrw9msgeM=');
         $tricktres->setVideoLink('https://www.youtube.com/watch?v=P7NeerMfLq0');
         $tricktres->setCreatedAt(new DateTimeImmutable());
-        $tricktres->setModifedAt(new DateTimeImmutable());
+        $tricktres->setmodifiedAt(new DateTimeImmutable());
         $tricktres->setDeleted(0);
         $tricktres->setDiscussionChannel('empty');
         
@@ -95,7 +95,7 @@ class AppFixtures extends Fixture
         $tricktroispointcinq->setImageLink('https://media.istockphoto.com/id/165635215/vector/snowboarder-jumping.jpg?s=612x612&w=0&k=20&c=QbAL8KNH6Y4q-MxAmlQKTpJsoGghZVYdeGZrw9msgeM=');
         $tricktroispointcinq->setVideoLink('https://www.youtube.com/watch?v=sl65sMSWrpY');
         $tricktroispointcinq->setCreatedAt(new DateTimeImmutable());
-        $tricktroispointcinq->setModifedAt(new DateTimeImmutable());
+        $tricktroispointcinq->setmodifiedAt(new DateTimeImmutable());
         $tricktroispointcinq->setDeleted(0);
         $tricktroispointcinq->setDiscussionChannel('empty');
         
@@ -111,7 +111,7 @@ class AppFixtures extends Fixture
         $trickfour->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Tricks-Stalefish-Grab-620x393.jpg');
         $trickfour->setVideoLink('https://www.youtube.com/watch?v=oYkGZ3H6FNw');
         $trickfour->setCreatedAt(new DateTimeImmutable());
-        $trickfour->setModifedAt(new DateTimeImmutable());
+        $trickfour->setmodifiedAt(new DateTimeImmutable());
         $trickfour->setDeleted(0);
         $trickfour->setDiscussionChannel('empty');
 
@@ -125,7 +125,7 @@ class AppFixtures extends Fixture
         $trickfive->setImageLink('https://thumbs.dreamstime.com/b/snowboarder-performing-tail-grab-snowboarder-performing-tail-grab-mountains-129820259.jpg');
         $trickfive->setVideoLink('https://www.youtube.com/watch?v=lunYxCQrs1E');
         $trickfive->setCreatedAt(new DateTimeImmutable());
-        $trickfive->setModifedAt(new DateTimeImmutable());
+        $trickfive->setmodifiedAt(new DateTimeImmutable());
         $trickfive->setDeleted(0);
         $trickfive->setDiscussionChannel('empty');
 
@@ -140,7 +140,7 @@ class AppFixtures extends Fixture
         $tricksix->setImageLink('https://miro.medium.com/max/1200/1*vV1tWalQFCyMhMPsSFwthA.jpeg');
         $tricksix->setVideoLink('https://www.youtube.com/watch?v=lunYxCQrs1E');
         $tricksix->setCreatedAt(new DateTimeImmutable());
-        $tricksix->setModifedAt(new DateTimeImmutable());
+        $tricksix->setmodifiedAt(new DateTimeImmutable());
         $tricksix->setDeleted(0);
         $tricksix->setDiscussionChannel('empty');
 
@@ -155,7 +155,7 @@ class AppFixtures extends Fixture
         $trickseven->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2013/09/FS180.jpg');
         $trickseven->setVideoLink('https://www.youtube.com/watch?v=ENalkvktYAI');
         $trickseven->setCreatedAt(new DateTimeImmutable());
-        $trickseven->setModifedAt(new DateTimeImmutable());
+        $trickseven->setmodifiedAt(new DateTimeImmutable());
         $trickseven->setDeleted(0);
         $trickseven->setDiscussionChannel('empty');
         
@@ -170,7 +170,7 @@ class AppFixtures extends Fixture
         $trickeight->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2011/11/Whitelines-95-gap-to-fronslide-boardslide.jpg');
         $trickeight->setVideoLink('https://www.youtube.com/watch?v=R3OG9rNDIcs');
         $trickeight->setCreatedAt(new DateTimeImmutable());
-        $trickeight->setModifedAt(new DateTimeImmutable());
+        $trickeight->setmodifiedAt(new DateTimeImmutable());
         $trickeight->setDeleted(0);
         $trickeight->setDiscussionChannel('empty');
         
@@ -185,7 +185,7 @@ class AppFixtures extends Fixture
         $tricknine->setImageLink('https://miro.medium.com/max/1156/1*6zaXI7Gk_5DM4wpKWvSjCw.jpeg');
         $tricknine->setVideoLink('https://www.youtube.com/watch?v=WRjNFodnOHk');
         $tricknine->setCreatedAt(new DateTimeImmutable());
-        $tricknine->setModifedAt(new DateTimeImmutable());
+        $tricknine->setmodifiedAt(new DateTimeImmutable());
         $tricknine->setDeleted(0);
         $tricknine->setDiscussionChannel('empty');
 
