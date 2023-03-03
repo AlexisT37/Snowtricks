@@ -75,7 +75,7 @@ class TrickController extends AbstractController
             ]);
         } else {
             $this->addFlash('error', 'You can only edit your own tricks !');
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('edit', ['slug' => $trick->getSlug()]);
         }
     }
 
