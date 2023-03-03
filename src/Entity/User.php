@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Trick::class)]
     private Collection $tricks;
 
+    #[ORM\Column(length: 255)]
+    private ?string $photo = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -203,4 +206,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
 }
