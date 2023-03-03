@@ -22,7 +22,15 @@
         <p>{{ trick.slug }}</p>
         <p> Par {{ trick.creator.fullname }}</p>
         <img src="{{ trick.getImageLink(300) }}" alt="a trick image" width="300" height="200">
-            <iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{% if trick.getVideoLink() is defined and 'youtube' in trick.getVideoLink() and 'youtu.be' not in trick.getVideoLink() %}
+	<iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% else %}
+    <p>There is no video for this trick</p>
+{% endif %}
+
+            
+
 
 
     {# Button to add a comment to the trick #}
