@@ -26,6 +26,7 @@ class AppFixtures extends Fixture
         $user->setFullname('John Doe');
         $user->setRoles(['ROLE_USER']);
         $user->setPassword('password');
+        $user->setPhoto('https://static.wikia.nocookie.net/shadowsdietwice/images/d/d1/Withered_Red_Gourd.png');
 
         $manager->persist($user);
         $manager->flush();
