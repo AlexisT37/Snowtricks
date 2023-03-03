@@ -9,7 +9,6 @@
 	<div class="mb-4 d-flex justify-content-between">
 		<a href="{{ path('app_home') }}">Home</a>
 		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-			{# Display content for unauthenticated users #}
 			<a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
 			<a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
 		{% endif %}
@@ -48,7 +47,6 @@
 		{% endif %}
 	{% endif %}
 
-	{# Button to add a comment to the trick #}
 	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 		{% if app.user.verified == 1 %}
 			<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
@@ -57,20 +55,22 @@
 		{% endif %}
 	{% endif %}
 
-	{# Display all comments #}
 	<h3>Comments</h3>
-	{% for comment in trick.comments %}
-		<div class="card mb-2">
+	{% for comment in comments %}
+		<div class="card mb-3">
 			<div class="card-body">
-				<p>{{ comment.content }}</p>
-				<p>by
-					{{ comment.authorname.fullname}}</p>
-				<img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="70" height="70">
-				<p>Date et heure de la création : {{ comment.createdAt|date('d/m/Y H:i') }}</p>
-				
+				<h5 class="card-title"> Par {{ comment.authorname.fullname }}</h5>
+				<img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="40" height="40">
+				<p class="card-text">{{ comment.content }}</p>
+				<p class="card-text"><small class="text-muted">Posté le {{ comment.createdAt|date('d/m/Y H:i') }}</small></p>
 			</div>
 		</div>
+	{% else %}
+		<p>There is no comment for this trick</p>
 	{% endfor %}
+
+		{{ pagerfanta(pagerfanta) }}
+
 {% endblock %}
 
 {% block javascripts %}
