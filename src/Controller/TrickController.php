@@ -22,6 +22,10 @@ class TrickController extends AbstractController
     {
         $comments = $trick->getComments();
         $comments = $comments->getValues();
+        // sort the comments by date from the newest to the oldest
+        // using the usort function and a callback function that compares the dates of creation
+        // it progressively, from the first to the last element, compares the dates of creation of two consecutive comments
+
         usort($comments, function ($a, $b) {
             return $a->getCreatedAt() < $b->getCreatedAt();
         });
