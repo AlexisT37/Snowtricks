@@ -30,9 +30,6 @@ class Trick
     private ?string $trickgroup = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $imageLink = '';
-
-    #[ORM\Column(length: 255)]
     private ?string $videoLink = null;
 
     #[ORM\Column]
@@ -103,18 +100,6 @@ class Trick
     public function setTrickgroup(string $trickgroup): self
     {
         $this->trickgroup = $trickgroup;
-
-        return $this;
-    }
-
-    public function getImageLink(): ?string
-    {
-        return $this->imageLink;
-    }
-
-    public function setImageLink(string $imageLink): self
-    {
-        $this->imageLink = $imageLink;
 
         return $this;
     }

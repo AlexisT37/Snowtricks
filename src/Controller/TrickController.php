@@ -57,9 +57,10 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($trick);
-            dump($form);
-            // dump($form->get('imageLinks')->getData());
+            foreach ($trick->getImageLinks() as $imageLink) {
+                $imageLink->setTrick($trick);
+            }
+
             $entityManager->persist($trick);
             $entityManager->flush();
 
