@@ -30,7 +30,7 @@ class Trick
     private ?string $trickgroup = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $imageLink = null;
+    private ?string $imageLink = '';
 
     #[ORM\Column(length: 255)]
     private ?string $videoLink = null;
@@ -63,6 +63,7 @@ class Trick
 
     public function __construct()
     {
+        $this->imageLinks = new ArrayCollection();
     }
 
     public function getId(): ?int
