@@ -16,6 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Psr\Log\LoggerInterface;
 
+// use datetime
+use DateTime;
+
 class TrickController extends AbstractController
 {
     #[Route('/viewdetail/{slug}', name: 'viewdetail')]
@@ -27,7 +30,7 @@ class TrickController extends AbstractController
         // using the usort function and a callback function that compares the dates of creation
         // it progressively, from the first to the last element, compares the dates of creation of two consecutive comments
 
-        usort($comments, function ($a, $b) {
+        usort($comments, function (Comment $a, Comment $b) {
             return $a->getCreatedAt() < $b->getCreatedAt();
         });
         $adapter = new ArrayAdapter($comments);
@@ -73,7 +76,7 @@ class TrickController extends AbstractController
             try {
                 $entityManager->flush();
             } catch (\Exception $e) {
-                dump($e->getMessage());
+                $this->addFlash('error', $e->getMessage());
             }
         
             $this->addFlash('success', 'Trick created !');
@@ -86,8 +89,8 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{slug}', name: 'edit')]
-    public function edit(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/edit/{slug}', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(TrickRepository $trickRepository, string $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if ($trick->getCreator() == $this->getUser()) {
@@ -111,7 +114,7 @@ class TrickController extends AbstractController
     }
 
     #[Route('/addcomment/{slug}', name: 'addcomment')]
-    public function addcomment(TrickRepository $trickRepository, $slug, Request $request, EntityManagerInterface $entityManager): Response
+    public function addcomment(TrickRepository $trickRepository, string $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         $comment = new Comment();
@@ -133,7 +136,7 @@ class TrickController extends AbstractController
     }
 
     #[Route('/delete/{slug}', name: 'delete')]
-    public function delete(TrickRepository $trickRepository, $slug, EntityManagerInterface $entityManager): Response
+    public function delete(TrickRepository $trickRepository, string $slug, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
         if ($trick->getCreator() == $this->getUser()) {

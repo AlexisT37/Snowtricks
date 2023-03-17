@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-// use Pagerfanta\Adapter\ArrayAdapter;
-// use Pagerfanta\Pagerfanta;
 
 class HomeController extends AbstractController
 {
