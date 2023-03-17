@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Psr\Log\LoggerInterface;
 
 class TrickController extends AbstractController
 {
@@ -43,8 +44,9 @@ class TrickController extends AbstractController
     }
 
     #[Route('/create', name: 'create')]
-    public function create(EntityManagerInterface $entityManager, Request $request): Response
+    public function create(EntityManagerInterface $entityManager, Request $request, LoggerInterface $logger): Response
     {
+        $logger->info('Test log message');
         $trick = new Trick();
         $trick->setCreator($this->getUser());
         $trick->setCreatedAt(new DateTimeImmutable());
@@ -57,14 +59,25 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             foreach ($trick->getImageLinks() as $imageLink) {
                 $imageLink->setTrick($trick);
             }
-
+            foreach ($trick->getVideoLinks() as $videoLink) {
+                $videoLink->setTrick($trick);
+                $entityManager->persist($videoLink);
+            }
+        
             $entityManager->persist($trick);
-            $entityManager->flush();
-
+            
+            try {
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                dump($e->getMessage());
+            }
+        
             $this->addFlash('success', 'Trick created !');
+
             return $this->redirectToRoute('app_home');
         }
 

@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\ImageLink;
+use App\Entity\VideoLink;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\TrickRepository;
 use Gedmo\Mapping\Annotation\Slug;
+use App\Repository\TrickRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
@@ -28,9 +30,6 @@ class Trick
 
     #[ORM\Column(length: 255)]
     private ?string $trickgroup = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $videoLink = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -58,9 +57,13 @@ class Trick
     #[ORM\JoinColumn(nullable: false)]
     private ?User $creator = null;
 
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: VideoLink::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $videoLinks;
+
     public function __construct()
     {
         $this->imageLinks = new ArrayCollection();
+        $this->videoLinks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,19 +106,7 @@ class Trick
 
         return $this;
     }
-
-    public function getVideoLink(): ?string
-    {
-        return $this->videoLink;
-    }
-
-    public function setVideoLink(string $videoLink): self
-    {
-        $this->videoLink = $videoLink;
-
-        return $this;
-    }
-
+    
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -244,6 +235,36 @@ class Trick
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, VideoLink>
+     */
+    public function getVideoLinks(): Collection
+    {
+        return $this->videoLinks;
+    }
+
+    public function addVideoLink(VideoLink $videoLink): self
+    {
+        if (!$this->videoLinks->contains($videoLink)) {
+            $this->videoLinks->add($videoLink);
+            $videoLink->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideoLink(VideoLink $videoLink): self
+    {
+        if ($this->videoLinks->removeElement($videoLink)) {
+            // set the owning side to null (unless already changed)
+            if ($videoLink->getTrick() === $this) {
+                $videoLink->setTrick(null);
+            }
+        }
 
         return $this;
     }

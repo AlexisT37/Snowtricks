@@ -11,3 +11,4 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 import './Form/ImageLink';
+import './Form/VideoLink';

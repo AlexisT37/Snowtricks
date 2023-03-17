@@ -1,27 +1,27 @@
-console.log('ImageLink.js loaded');
+console.log('VideoLink.js loaded');
 
 // create a new link
-const addImageLinkLink = document.createElement('a')
+const addVideoLinkLink = document.createElement('a')
 // add a css class to the link
-addImageLinkLink.classList.add('add_imagelink_list')
+addVideoLinkLink.classList.add('add_videolink_list')
 // add set a fake href to the link
-addImageLinkLink.href='#'
+addVideoLinkLink.href='#'
 // add a text to the link
-addImageLinkLink.innerText='Add a imagelink'
+addVideoLinkLink.innerText='Add a videolink'
 // adds a data attribute to the link
-addImageLinkLink.dataset.collectionHolderClass='imagelinks'
+addVideoLinkLink.dataset.collectionHolderClass='videolinks'
 
 // create a new list item and append the link to it
-const newLinkLi = document.createElement('li').append(addImageLinkLink)
+const newLinkLi = document.createElement('li').append(addVideoLinkLink)
 
 // get the ul element
-const collectionHolder = document.querySelector('ul.imagelinks')
+const collectionHolder = document.querySelector('ul.videolinks')
 // append the new list item to the ul element
-collectionHolder.appendChild(addImageLinkLink)
+collectionHolder.appendChild(addVideoLinkLink)
 
 // add a click event listener to the link, the function will be called when the link is clicked, it takes an event as a parameter
-const addImageFormToCollection = (e) => {
-    // finds the closest parent element with the class name specified in the data attribute, namely 'imagelinks'
+const addVideoFormToCollection = (e) => {
+    // finds the closest parent element with the class name specified in the data attribute, namely 'videolinks'
 	const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
     // create a new list item
@@ -46,6 +46,6 @@ const addImageFormToCollection = (e) => {
 }
 
 // add the click event listener to the link
-addImageLinkLink.addEventListener("click", addImageFormToCollection)
+addVideoLinkLink.addEventListener("click", addVideoFormToCollection)
 
-console.log(addImageLinkLink);
+console.log(addVideoLinkLink);

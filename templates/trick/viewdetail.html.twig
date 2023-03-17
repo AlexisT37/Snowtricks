@@ -20,25 +20,29 @@
 
 
 	<h2>{{ trick.name }}</h2>
-	<p>Description {{ trick.description }}</p>
-	<p>Créé le {{ trick.createdAt|date('d/m/Y H:i') }}</p>
-	<p>Dernière modification le {{ trick.modifiedAt|date('d/m/Y H:i') }}</p>
-	<p>Groupe du trick : {{ trick.trickgroup }}</p>
-	<p>
-		Par
-		{{ trick.creator.fullname }}</p>
-	<p>Images</p>
-	{% for image in trick.imageLinks %}
-		<img src="{{ image.getContent(300) }}" alt="a trick image" width="300" height="200">
-	{% endfor %}
-<pre>
-	{{ dump(trick) }}
-</pre>
-	{% if trick.getVideoLink() is defined and 'youtube' in trick.getVideoLink() and 'youtu.be' not in trick.getVideoLink() %}
-		<iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	{% else %}
-		<p>There is no video for this trick</p>
-	{% endif %}
+<p>Description {{ trick.description }}</p>
+<p>Créé le {{ trick.createdAt|date('d/m/Y H:i') }}</p>
+<p>Dernière modification le {{ trick.modifiedAt|date('d/m/Y H:i') }}</p>
+<p>Groupe du trick : {{ trick.trickgroup }}</p>
+<p>
+    Par
+    {{ trick.creator.fullname }}</p>
+<p>Images</p>
+{% for image in trick.imageLinks %}
+    <img src="{{ image.getContent(300) }}" alt="a trick image" width="300" height="200">
+{% endfor %}
+
+<p>Videos</p>
+{% if trick.videoLinks is not empty %}
+    {% for video in trick.videoLinks %}
+        {% if 'youtube' in video.content and 'youtu.be' not in video.content %}
+            <iframe width="300" height="200" src="{{ video.content|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p>There are no videos for this trick</p>
+{% endif %}
+
 
 	{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
 		{% if app.user.verified == 1 %}
