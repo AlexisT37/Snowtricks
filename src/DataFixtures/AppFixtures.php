@@ -38,7 +38,6 @@ class AppFixtures extends Fixture
         $userRepository = $this->em->getRepository(User::class);
         $user = $userRepository->findOneBy(['email' => $email]);
 
-        // dump($user);
         if (!$user) {
             throw new \Exception(sprintf('User with email "%s" not found', $email));
         }

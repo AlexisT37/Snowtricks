@@ -6,6 +6,17 @@
     <h1>Create a new trick</h1>
     {{ form_start(form) }}
         {{ form_widget(form) }}
+        <ul class="imagelinks" data-prototype="&lt;div&gt;&lt;label class=&quot; required&quot;&gt;__name__&lt;/label&gt;&lt;div id=&quot;trick_imagelinks___name__&quot;&gt;&lt;div&gt;&lt;label for=&quot;trick_imagelinks___name___name&quot; class=&quot; required&quot;&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;trick_imagelinks___name___name&quot; name=&quot;trick[imagelinks][__name__][name]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" data-index="0">
+        </ul>
+        <ul class="videolinks" data-prototype="&lt;div&gt;&lt;label class=&quot; required&quot;&gt;__name__&lt;/label&gt;&lt;div id=&quot;trick_videolinks___name__&quot;&gt;&lt;div&gt;&lt;label for=&quot;trick_videolinks___name___name&quot; class=&quot; required&quot;&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;trick_videolinks___name___name&quot; name=&quot;trick[videolinks][__name__][name]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" data-index="0">
+        </ul>
+{# <button type="button" class="add_item_link" data-collection-holder-class="imagelinks">Add a link</button> #}
         <input type="submit" value="Create">
     {{ form_end(form) }}
+{% endblock %}
+{# import ImageLink.js #}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/ImageLink.js') }}"></script>
+    <script src="{{ asset('js/VideoLink.js') }}"></script>
 {% endblock %}
