@@ -60,11 +60,22 @@
 				<ion-icon name="trash-outline"></ion-icon>
 			</a>
 		{% endif %}
-		{% if trick.getVideoLink() is defined and 'youtube' in trick.getVideoLink() and 'youtu.be' not in trick.getVideoLink() %}
-			<iframe width="300" height="200" src="{{ trick.getVideoLink()|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		{% set firstImage = trick.imageLinks|first %}
+		{% if firstImage is defined %}
+			<img src="{{ firstImage.getContent(300) }}" alt="a trick image" width="300" height="200">
 		{% else %}
-			<p>youtube link invalid, if it is a youtu.be change it to the youtube.com version</p>
+			<p>There are no images for this trick</p>
 		{% endif %}
+
+		{% set firstVideo = trick.videoLinks|first %}
+		{% if firstVideo is defined %}
+			{% if 'youtube' in firstVideo.content and 'youtu.be' not in firstVideo.content %}
+				<iframe width="300" height="200" src="{{ firstVideo.content|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			{% endif %}
+		{% else %}
+			<p>There are no videos for this trick</p>
+		{% endif %}
+
 
 	{% endif %}
 </br></br></br>{% endfor %}
