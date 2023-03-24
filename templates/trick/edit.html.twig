@@ -9,3 +9,9 @@
         <input type="submit" value="Save Changes">
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/ImageLink.js') }}"></script>
+    <script src="{{ asset('js/VideoLink.js') }}"></script>
+{% endblock %}

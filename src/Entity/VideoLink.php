@@ -13,7 +13,7 @@ class VideoLink
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'videoLinks')]
@@ -30,7 +30,7 @@ class VideoLink
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(string|null $content): self
     {
         $this->content = $content;
 

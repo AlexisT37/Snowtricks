@@ -43,6 +43,33 @@ const addImageFormToCollection = (e) => {
 
     // increment the index of the collection so that the next item will have a different index
     collectionHolder.dataset.index++;
+
+
+
+    console.log('add link');
+
+    // create a button below the link with an id of coucou
+    const removelinkbutton = document.createElement('button');
+    removelinkbutton.innerHTML = "Remove link";
+    // add the button as a sibling of the link
+    e.currentTarget.parentNode.appendChild(removelinkbutton);
+
+    // add a click event listener to the button
+    removelinkbutton.addEventListener("click", removeImageFormFromCollection)
+    // if the button is clicked, the removeImageFormFromCollection function will be called
+
+    console.log('end test link');
+}
+
+function removeImageFormFromCollection(e) {
+    // get the previous sibling of the button
+
+    const sibling = e.currentTarget.previousSibling;
+    // remove the parent element from the DOM
+    sibling.remove();
+
+    // also remove the button itself
+    e.currentTarget.remove();
 }
 
 // add the click event listener to the link
