@@ -34,6 +34,9 @@ RUN yarn build
 # Prod image
 FROM php:8.2-fpm-alpine AS app_php
 
+RUN mkdir -p /srv/app/sessions && \
+    chown -R www-data:www-data /srv/app/sessions
+
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
 ENV STABILITY ${STABILITY}
@@ -68,7 +71,10 @@ RUN set -eux; \
 
 ###> recipes ###
 ###> doctrine/doctrine-bundle ###
-RUN "apk add --no-cache --virtual .pgsql-deps postgresql-dev;" "docker-php-ext-install -j$(nproc) pdo_pgsql;" "apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5;" "apk del .pgsql-deps"
+RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev && \
+    docker-php-ext-install -j$(nproc) pdo_pgsql && \
+    apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5 && \
+    apk del .pgsql-deps
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
