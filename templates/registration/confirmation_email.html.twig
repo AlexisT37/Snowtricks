@@ -2,7 +2,30 @@
 
 <p>
     Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
+    {% set signedUrlParts = signedUrl|split('?') %}
+{% set queryParams = signedUrlParts[1]|split('&') %}
+{% set encodedQueryParams = [] %}
+
+{% for param in queryParams %}
+    {% set keyValue = param|split('=') %}
+    {% set encodedQueryParams = encodedQueryParams|merge({(keyValue[0]): keyValue[1]|url_encode}) %}
+{% endfor %}
+
+{% set encodedQueryString = '' %}
+{% for key, value in encodedQueryParams %}
+    {% set encodedQueryString = (encodedQueryString == '') ? (key ~ '=' ~ value) : (encodedQueryString ~ '&' ~ key ~ '=' ~ value) %}
+{% endfor %}
+
+{% set encodedSignedUrl = signedUrlParts[0] ~ '?' ~ encodedQueryString %}
+
+{% if '%25' in encodedSignedUrl %}
+    {% set encodedSignedUrl = encodedSignedUrl|replace({'%25': '%'}) %}
+{% endif %}
+
+
+<a href="{{ encodedSignedUrl }}">Confirm my Email</a>.
+
+
     This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
