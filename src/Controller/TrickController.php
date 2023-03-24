@@ -21,7 +21,7 @@ use DateTime;
 
 class TrickController extends AbstractController
 {
-    #[Route('/viewdetail/{slug}', name: 'viewdetail')]
+    #[Route('/viewdetail/{slug}', name: 'viewdetail', methods: ['GET'])]
     public function viewdetail(Trick $trick, Request $request, TrickRepository $trickRepository): Response
     {
         $comments = $trick->getComments();
@@ -46,7 +46,7 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'create')]
+    #[Route('/create', name: 'create', methods: ['GET', 'POST'])]
     public function create(EntityManagerInterface $entityManager, Request $request, LoggerInterface $logger): Response
     {
         $logger->info('Test log message');
@@ -113,7 +113,7 @@ class TrickController extends AbstractController
         }
     }
 
-    #[Route('/addcomment/{slug}', name: 'addcomment')]
+    #[Route('/addcomment/{slug}', name: 'addcomment', methods: ['GET', 'POST'])]
     public function addcomment(TrickRepository $trickRepository, string $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
@@ -135,7 +135,7 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{slug}', name: 'delete')]
+    #[Route('/delete/{slug}', name: 'delete', methods: ['GET', 'POST'])]
     public function delete(TrickRepository $trickRepository, string $slug, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
