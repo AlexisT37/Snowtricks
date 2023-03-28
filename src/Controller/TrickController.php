@@ -98,6 +98,22 @@ class TrickController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
+                // if one of the image links has been set to null or is an empty string, remove it from the collection
+                foreach ($trick->getImageLinks() as $imageLink) {
+                    if ($imageLink->getContent() == null || $imageLink->getContent() == '') {
+                        $trick->removeImageLink($imageLink);
+                    }
+                }
+
+                // if one of the video links has been set to null or is an empty string, remove it from the collection
+                foreach ($trick->getVideoLinks() as $videoLink) {
+                    if ($videoLink->getContent() == null || $videoLink->getContent() == '') {
+                        $trick->removeVideoLink($videoLink);
+                    }
+                }
+
+
                 $entityManager->persist($trick);
                 $entityManager->flush();
 

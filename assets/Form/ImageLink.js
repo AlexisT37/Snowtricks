@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Your code here
+
+
 console.log('ImageLink.js loaded');
 
 // create a new link
@@ -76,3 +80,5 @@ function removeImageFormFromCollection(e) {
 addImageLinkLink.addEventListener("click", addImageFormToCollection)
 
 console.log(addImageLinkLink);
+
+});

@@ -61,10 +61,12 @@
 			</a>
 		{% endif %}
 		{% set firstImage = trick.imageLinks|first %}
+		{% if firstImage is not same as(false) %}
 		{% if firstImage is defined %}
 			<img src="{{ firstImage.getContent(300) }}" alt="a trick image" width="300" height="200">
 		{% else %}
 			<p>There are no images for this trick</p>
+		{% endif %}
 		{% endif %}
 
 		{% set firstVideo = trick.videoLinks|first %}

@@ -1,4 +1,8 @@
-console.log('VideoLink.js loaded');
+document.addEventListener('DOMContentLoaded', () => {
+    // Your code here
+
+
+// console.log('VideoLink.js loaded');
 
 // create a new link
 const addVideoLinkLink = document.createElement('a')
@@ -53,13 +57,13 @@ const addVideoFormToCollection = (e) => {
     e.currentTarget.parentNode.appendChild(removelinkbutton);
 
     // add a click event listener to the button
-    removelinkbutton.addEventListener("click", removeImageFormFromCollection)
-    // if the button is clicked, the removeImageFormFromCollection function will be called
+    removelinkbutton.addEventListener("click", removeVideoFormFromCollection)
+    // if the button is clicked, the removeVideoFormFromCollection function will be called
 
     console.log('end test video link');
 }
 
-function removeImageFormFromCollection(e) {
+function removeVideoFormFromCollection(e) {
     // get the previous sibling of the button
 
     const sibling = e.currentTarget.previousSibling;
@@ -73,4 +77,6 @@ function removeImageFormFromCollection(e) {
 // add the click event listener to the link
 addVideoLinkLink.addEventListener("click", addVideoFormToCollection)
 
-console.log(addVideoLinkLink);
+// console.log(addVideoLinkLink);
+
+});
