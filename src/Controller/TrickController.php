@@ -63,6 +63,8 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // dd($form->getData());
+
             foreach ($trick->getImageLinks() as $imageLink) {
                 $imageLink->setTrick($trick);
             }
@@ -98,6 +100,18 @@ class TrickController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                // dd($form->getData());
+
+                
+
+                foreach ($trick->getImageLinks() as $imageLink) {
+                    $imageLink->setTrick($trick);
+                    $entityManager->persist($imageLink);
+                }
+                foreach ($trick->getVideoLinks() as $videoLink) {
+                    $videoLink->setTrick($trick);
+                    $entityManager->persist($videoLink);
+                }
 
                 // if one of the image links has been set to null or is an empty string, remove it from the collection
                 foreach ($trick->getImageLinks() as $imageLink) {
@@ -112,7 +126,6 @@ class TrickController extends AbstractController
                         $trick->removeVideoLink($videoLink);
                     }
                 }
-
 
                 $entityManager->persist($trick);
                 $entityManager->flush();

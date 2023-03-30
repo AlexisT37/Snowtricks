@@ -4,6 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 console.log('ImageLink.js loaded');
 
+console.log('test before create');
+
+const toto = document.querySelector('#createEdit');
+console.log('toto');
+console.log(toto);
+
+var edit = false;
+
+// if inner html of toto = 'Edit your trick' then print edit
+if (toto.innerHTML === 'Edit trick') {
+    console.log('edit');
+    edit = true;
+} else {
+    console.log('create');
+    
+}
+console.log('test after create');
+
 // create a new link
 const addImageLinkLink = document.createElement('a')
 // add a css class to the link
@@ -25,12 +43,15 @@ collectionHolder.appendChild(addImageLinkLink)
 
 // add a click event listener to the link, the function will be called when the link is clicked, it takes an event as a parameter
 const addImageFormToCollection = (e) => {
+    e.preventDefault();
     // finds the closest parent element with the class name specified in the data attribute, namely 'imagelinks'
 	const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
     // create a new list item
     const item = document.createElement('li');
 
+
+    
     // sets the innerHTML of the list item to the prototype of the collection
     item.innerHTML = collectionHolder
         // access the prototype attribute of the collection
@@ -50,7 +71,7 @@ const addImageFormToCollection = (e) => {
 
 
 
-    console.log('add link');
+    // console.log('add link');
 
     // create a button below the link with an id of coucou
     const removelinkbutton = document.createElement('button');
@@ -62,7 +83,7 @@ const addImageFormToCollection = (e) => {
     removelinkbutton.addEventListener("click", removeImageFormFromCollection)
     // if the button is clicked, the removeImageFormFromCollection function will be called
 
-    console.log('end test link');
+    // console.log('end test link');
 }
 
 function removeImageFormFromCollection(e) {
@@ -79,6 +100,6 @@ function removeImageFormFromCollection(e) {
 // add the click event listener to the link
 addImageLinkLink.addEventListener("click", addImageFormToCollection)
 
-console.log(addImageLinkLink);
+// console.log(addImageLinkLink);
 
 });
