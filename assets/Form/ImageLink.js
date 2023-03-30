@@ -44,47 +44,51 @@ collectionHolder.appendChild(addImageLinkLink)
 // add a click event listener to the link, the function will be called when the link is clicked, it takes an event as a parameter
 const addImageFormToCollection = (e) => {
     e.preventDefault();
-    // finds the closest parent element with the class name specified in the data attribute, namely 'imagelinks'
-	const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+    const collectionHolderClass = e.currentTarget.dataset.collectionHolderClass;
+    const collectionHolder = document.querySelector(`.${collectionHolderClass}`);
+    const parentElement = collectionHolder.parentElement;
 
-    // create a new list item
+    // Count existing elements with a specific pattern in their id or for attributes
+    const existingElements = parentElement.querySelectorAll(`input[id^='trick_imagelinks_']`);
+    let maxIndex = -1;
+    existingElements.forEach((inputElement) => {
+        const idMatch = inputElement.id.match(/(?<=trick_imagelinks_)\d+/);
+        if (idMatch) {
+            const index = parseInt(idMatch[0], 10);
+            if (index > maxIndex) {
+                maxIndex = index;
+            }
+        }
+    });
+    const startIndex = maxIndex + 1;
+    console.log('startIndex', startIndex)
+
     const item = document.createElement('li');
-
-
-    
-    // sets the innerHTML of the list item to the prototype of the collection
     item.innerHTML = collectionHolder
-        // access the prototype attribute of the collection
         .dataset
         .prototype
-        // replace the __name__ placeholder with the current index of the collection
         .replace(
             /__name__/g,
-            collectionHolder.dataset.index
+            startIndex
+        )
+        // Fix the 'for' attribute of the label
+        .replace(
+            /for="trick_imagelinks___name___content"/g,
+            `for="trick_imagelinks_${startIndex}_content"`
         );
 
-    // append the new list item to the ul element
     collectionHolder.appendChild(item);
+    collectionHolder.dataset.index = startIndex + 1;
 
-    // increment the index of the collection so that the next item will have a different index
-    collectionHolder.dataset.index++;
-
-
-
-    // console.log('add link');
-
-    // create a button below the link with an id of coucou
     const removelinkbutton = document.createElement('button');
     removelinkbutton.innerHTML = "Remove link";
-    // add the button as a sibling of the link
     e.currentTarget.parentNode.appendChild(removelinkbutton);
 
-    // add a click event listener to the button
     removelinkbutton.addEventListener("click", removeImageFormFromCollection)
-    // if the button is clicked, the removeImageFormFromCollection function will be called
-
-    // console.log('end test link');
 }
+
+
+
 
 function removeImageFormFromCollection(e) {
     // get the previous sibling of the button
