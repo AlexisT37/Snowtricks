@@ -49,3 +49,15 @@ a:hover {
     background-color: #218838;
     border-color: #218838;
 }
+
+.trick-container {
+    display: inline-block;
+    text-align: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.trick-container img {
+        display: block;
+        margin-bottom: 10px;
+    }

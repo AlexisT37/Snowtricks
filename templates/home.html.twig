@@ -34,6 +34,7 @@
 <ul>
 	{% for trick in pagerfanta %}
 		{% if trick.deleted == 0 %}
+		<div class="trick-container">
 			<a class="text-decoration-none message_top_home" href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
 			{# show below only if the user is the creator of the trick #}
 			{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
@@ -52,6 +53,7 @@
 				{% else %}
 					<p>There are no images for this trick</p>
 				{% endif %}
+				</div>
 			{% endif %}
 		{% endif %}
 	</br>
