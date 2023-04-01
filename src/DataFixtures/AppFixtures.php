@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use App\Entity\Trick;
 use DateTimeImmutable;
+use App\Entity\ImageLink;
+use App\Entity\VideoLink;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -27,7 +29,7 @@ class AppFixtures extends Fixture
         $user->setRoles(['ROLE_USER']);
         $user->setPassword('password');
         $user->setPhoto('https://static.wikia.nocookie.net/shadowsdietwice/images/d/d1/Withered_Red_Gourd.png');
-
+        $user->setIsVerified(true);
         $manager->persist($user);
         $manager->flush();
 
@@ -41,11 +43,27 @@ class AppFixtures extends Fixture
         if (!$user) {
             throw new \Exception(sprintf('User with email "%s" not found', $email));
         }
+
         $trick->setCreator($user);
         $trick->setDescription('The easiest trick');
         $trick->setTrickgroup('Beginner');
-        $trick->setImageLink('https://snowboardingprofiles.com/wp-content/uploads/2015/07/how-to-do-an-ollie-on-a-snowboard.jpg');
-        $trick->setVideoLink('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $trick->addImageLink($imageLink);
+
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $trick->addImageLink($imageLink2);
+
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        
+        $trick->addVideoLink($videoLink);
+
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $trick->addVideoLink($videoLink2);
+
         $trick->setCreatedAt(new DateTimeImmutable());
         $trick->setmodifiedAt(new DateTimeImmutable());
         $trick->setDeleted(0);
@@ -60,8 +78,21 @@ class AppFixtures extends Fixture
         $trickdos->setCreator($user);
         $trickdos->setDescription('Grab Your board in the air !');
         $trickdos->setTrickgroup('Beginner');
-        $trickdos->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
-        $trickdos->setVideoLink('https://www.youtube.com/watch?v=MAj_pzqmC4o');
+
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $trickdos->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $trickdos->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $trickdos->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $trickdos->addVideoLink($videoLink2);
+
+
         $trickdos->setCreatedAt(new DateTimeImmutable());
         $trickdos->setmodifiedAt(new DateTimeImmutable());
         $trickdos->setDeleted(0);
@@ -70,14 +101,23 @@ class AppFixtures extends Fixture
         $manager->persist($trickdos);
 
 
-
         $tricktres = new Trick();
         $tricktres->setName('Relay');
         $tricktres->setCreator($user);
         $tricktres->setDescription('example three !');
         $tricktres->setTrickgroup('Beginner');
-        $tricktres->setImageLink('https://media.istockphoto.com/id/165635215/vector/snowboarder-jumping.jpg?s=612x612&w=0&k=20&c=QbAL8KNH6Y4q-MxAmlQKTpJsoGghZVYdeGZrw9msgeM=');
-        $tricktres->setVideoLink('https://www.youtube.com/watch?v=P7NeerMfLq0');
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $tricktres->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $tricktres->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $tricktres->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $tricktres->addVideoLink($videoLink2);
         $tricktres->setCreatedAt(new DateTimeImmutable());
         $tricktres->setmodifiedAt(new DateTimeImmutable());
         $tricktres->setDeleted(0);
@@ -91,8 +131,20 @@ class AppFixtures extends Fixture
         $tricktroispointcinq->setCreator($user);
         $tricktroispointcinq->setDescription('example four !');
         $tricktroispointcinq->setTrickgroup('Medium');
-        $tricktroispointcinq->setImageLink('https://media.istockphoto.com/id/165635215/vector/snowboarder-jumping.jpg?s=612x612&w=0&k=20&c=QbAL8KNH6Y4q-MxAmlQKTpJsoGghZVYdeGZrw9msgeM=');
-        $tricktroispointcinq->setVideoLink('https://www.youtube.com/watch?v=sl65sMSWrpY');
+        
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $tricktroispointcinq->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $tricktroispointcinq->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $tricktroispointcinq->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $tricktroispointcinq->addVideoLink($videoLink2);
+        
         $tricktroispointcinq->setCreatedAt(new DateTimeImmutable());
         $tricktroispointcinq->setmodifiedAt(new DateTimeImmutable());
         $tricktroispointcinq->setDeleted(0);
@@ -101,14 +153,23 @@ class AppFixtures extends Fixture
         $manager->persist($tricktroispointcinq);
 
 
-
         $trickfour = new Trick();
         $trickfour->setName('Stalefish');
         $trickfour->setCreator($user);
         $trickfour->setDescription('Stalefish is a trickfour that involves grabbing the heel edge of the board with the rear hand while the front leg is extended straight out.');
         $trickfour->setTrickgroup('Intermediate');
-        $trickfour->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Tricks-Stalefish-Grab-620x393.jpg');
-        $trickfour->setVideoLink('https://www.youtube.com/watch?v=oYkGZ3H6FNw');
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $trickfour->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $trickfour->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $trickfour->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $trickfour->addVideoLink($videoLink2);
         $trickfour->setCreatedAt(new DateTimeImmutable());
         $trickfour->setmodifiedAt(new DateTimeImmutable());
         $trickfour->setDeleted(0);
@@ -116,13 +177,26 @@ class AppFixtures extends Fixture
 
         $manager->persist($trickfour);
 
+
         $trickfive = new Trick();
         $trickfive->setName('Tail Grab');
         $trickfive->setCreator($user);
         $trickfive->setDescription('Tail Grab is a trick that involves grabbing the tail of the snowboard with the rear hand.');
         $trickfive->setTrickgroup('Beginner');
-        $trickfive->setImageLink('https://thumbs.dreamstime.com/b/snowboarder-performing-tail-grab-snowboarder-performing-tail-grab-mountains-129820259.jpg');
-        $trickfive->setVideoLink('https://www.youtube.com/watch?v=lunYxCQrs1E');
+
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $trickfive->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $trickfive->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $trickfive->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $trickfive->addVideoLink($videoLink2);
+
         $trickfive->setCreatedAt(new DateTimeImmutable());
         $trickfive->setmodifiedAt(new DateTimeImmutable());
         $trickfive->setDeleted(0);
@@ -131,13 +205,26 @@ class AppFixtures extends Fixture
         $manager->persist($trickfive);
 
 
+
         $tricksix = new Trick();
         $tricksix->setName('Method Grab');
         $tricksix->setCreator($user);
         $tricksix->setDescription('Method Grab is a trick that involves grabbing the heel edge of the board with the rear hand while the front leg is bent and the rear leg is extended.');
         $tricksix->setTrickgroup('Intermediate');
-        $tricksix->setImageLink('https://miro.medium.com/max/1200/1*vV1tWalQFCyMhMPsSFwthA.jpeg');
-        $tricksix->setVideoLink('https://www.youtube.com/watch?v=lunYxCQrs1E');
+        
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $tricksix->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $tricksix->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $tricksix->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $tricksix->addVideoLink($videoLink2);
+        
         $tricksix->setCreatedAt(new DateTimeImmutable());
         $tricksix->setmodifiedAt(new DateTimeImmutable());
         $tricksix->setDeleted(0);
@@ -145,14 +232,25 @@ class AppFixtures extends Fixture
 
         $manager->persist($tricksix);
 
-
         $trickseven = new Trick();
         $trickseven->setName('Frontside 180');
         $trickseven->setCreator($user);
         $trickseven->setDescription('Frontside 180 is a trick that involves rotating the b  oard 180 degrees in a frontside direction while in the air.');
         $trickseven->setTrickgroup('Intermediate');
-        $trickseven->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2013/09/FS180.jpg');
-        $trickseven->setVideoLink('https://www.youtube.com/watch?v=ENalkvktYAI');
+        
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $trickseven->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $trickseven->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $trickseven->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $trickseven->addVideoLink($videoLink2);
+
         $trickseven->setCreatedAt(new DateTimeImmutable());
         $trickseven->setmodifiedAt(new DateTimeImmutable());
         $trickseven->setDeleted(0);
@@ -161,13 +259,26 @@ class AppFixtures extends Fixture
         $manager->persist($trickseven);
 
 
+
         $trickeight = new Trick();
         $trickeight->setName('Backside Boardslide');
         $trickeight->setCreator($user);
         $trickeight->setDescription('Backside Boardslide is a trick that involves sliding the board along a rail or box with the backside of the board facing the obstacle.');
         $trickeight->setTrickgroup('Advanced');
-        $trickeight->setImageLink('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2011/11/Whitelines-95-gap-to-fronslide-boardslide.jpg');
-        $trickeight->setVideoLink('https://www.youtube.com/watch?v=R3OG9rNDIcs');
+        
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $trickeight->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $trickeight->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $trickeight->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $trickeight->addVideoLink($videoLink2);
+
         $trickeight->setCreatedAt(new DateTimeImmutable());
         $trickeight->setmodifiedAt(new DateTimeImmutable());
         $trickeight->setDeleted(0);
@@ -176,22 +287,32 @@ class AppFixtures extends Fixture
         $manager->persist($trickeight);
 
 
+        
         $tricknine = new Trick();
         $tricknine->setName('Frontside Boardslide');
         $tricknine->setCreator($user);
         $tricknine->setDescription('Frontside Boardslide is a trick that involves sliding the board along a rail or box with the frontside of the board facing the obstacle.');
         $tricknine->setTrickgroup('Intermediate');
-        $tricknine->setImageLink('https://miro.medium.com/max/1156/1*6zaXI7Gk_5DM4wpKWvSjCw.jpeg');
-        $tricknine->setVideoLink('https://www.youtube.com/watch?v=WRjNFodnOHk');
+        
+        $imageLink = new ImageLink();
+        $imageLink->setContent('https://coresites-cdn-adm.imgix.net/whitelines_new/wp-content/uploads/2014/01/Trick-Meloncollie-Grab-620x421.jpg');
+        $tricknine->addImageLink($imageLink);
+        $imageLink2 = new ImageLink();
+        $imageLink2->setContent('https://assets2.rockpapershotgun.com/obv.jpg/BROK/resize/1920x1920%3E/format/jpg/quality/80/obv.jpg');
+        $tricknine->addImageLink($imageLink2);
+        $videoLink = new VideoLink();
+        $videoLink->setContent('https://www.youtube.com/watch?v=kOyCsY4rBH0');
+        $tricknine->addVideoLink($videoLink);
+        $videoLink2 = new VideoLink();
+        $videoLink2->setContent('https://www.youtube.com/watch?v=ZsNPUaYV4PM');
+        $tricknine->addVideoLink($videoLink2);
+
         $tricknine->setCreatedAt(new DateTimeImmutable());
         $tricknine->setmodifiedAt(new DateTimeImmutable());
         $tricknine->setDeleted(0);
         $tricknine->setDiscussionChannel('empty');
 
         $manager->persist($tricknine);
-        
-
-
 
         $manager->flush();
     }

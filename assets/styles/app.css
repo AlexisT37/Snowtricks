@@ -58,3 +58,40 @@ a:hover {
     width: 300px;
     text-align: center;
 }
+
+.pagerfanta, .footer-text, .pagination__item {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+}
+
+.pagerfanta .current {
+    color: #fff;
+    background-color: #007bff;
+}
+
+/* Change the color of the previous and next buttons */
+.pagerfanta .previous a,
+.pagerfanta .next a {
+    color: #007bff;
+}
+
+/* Change the color for the first and last buttons */
+.pagerfanta .first a,
+.pagerfanta .last a {
+    color: #007bff;
+}
+
+/* Change the color of the page numbers when hovering */
+.pagerfanta a:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    }
+
+.footer-text {
+    margin-top: 1em;
+}
