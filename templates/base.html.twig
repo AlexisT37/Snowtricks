@@ -18,7 +18,9 @@
     <body>
 
 <div class="p-2 mb-4 d-flex">
-	<h1>SnowTricks</h1>
+	<a class="main-title-link" href="{{ path('app_home') }}">
+        <h1 class="main-title">SnowTricks</h1>
+    </a>
 	<div class="ms-auto mx-2 p-2">
 		<a href="{{ path('app_home') }}">Home</a>
 		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}

@@ -59,10 +59,21 @@ a:hover {
     text-align: center;
 }
 
-.pagerfanta, .footer-text, .pagination__item {
+.pagerfanta, .footer-text, .pagination__item, .add_imagelink_list, .add_videolink_list {
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
 }
+
+form label {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+  }
+
+  ul.imagelinks label,
+  ul.videolinks label {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+  }
 
 .pagerfanta .current {
     color: #fff;
@@ -94,4 +105,34 @@ a:hover {
 
 .footer-text {
     margin-top: 1em;
+}
+
+label {
+    margin-right: 1em;
+}
+
+button {
+    margin: 1em;
+    color : #000000;
+    border-radius: 0.5em;
+}
+
+.main-title {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+}
+
+main-title:hover {
+    text-decoration: none;
+    color: #007bff !important;
+}
+
+.main-title-link {
+    text-decoration: none;
+}
+
+.main-title-link:hover {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    color: #007bff !important;
 }
