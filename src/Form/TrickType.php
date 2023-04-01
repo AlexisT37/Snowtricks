@@ -7,6 +7,7 @@ use App\Form\ImageLinkType;
 use App\Form\VideoLinkType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -24,6 +25,18 @@ class TrickType extends AbstractType
                 'entry_options' => ['label' => false],
                 // allows the user to add as many image links as they want
                 'allow_add' => true,
+                // allows the user to delete as many image links as they want
+                'allow_delete' => true,
+                // delete empty
+                'delete_empty' => true,
+                // makes it so that there is no error message when the field is empty
+                'required' => false,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'You must specify at least one element.',
+                    ]),
+                ],
             ])
             ->add('videolinks', CollectionType::class, [
                 'entry_type' => VideoLinkType::class,
@@ -31,6 +44,16 @@ class TrickType extends AbstractType
                 'entry_options' => ['label' => false],
                 // allows the user to add as many video links as they want
                 'allow_add' => true,
+                'allow_delete' => true,
+                // delete empty
+                'delete_empty' => true,
+                'required' => false,
+                'constraints' => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'You must specify at least one element.',
+                    ]),
+                ],
             ])
             
         ;

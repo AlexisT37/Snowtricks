@@ -1,4 +1,8 @@
-console.log('VideoLink.js loaded');
+document.addEventListener('DOMContentLoaded', () => {
+    // Your code here
+
+
+// console.log('VideoLink.js loaded');
 
 // create a new link
 const addVideoLinkLink = document.createElement('a')
@@ -43,9 +47,36 @@ const addVideoFormToCollection = (e) => {
 
     // increment the index of the collection so that the next item will have a different index
     collectionHolder.dataset.index++;
+
+    console.log('add video link');
+
+    // create a button below the link with an id of coucou
+    const removelinkbutton = document.createElement('button');
+    removelinkbutton.innerHTML = "Remove link";
+    // add the button as a sibling of the link
+    e.currentTarget.parentNode.appendChild(removelinkbutton);
+
+    // add a click event listener to the button
+    removelinkbutton.addEventListener("click", removeVideoFormFromCollection)
+    // if the button is clicked, the removeVideoFormFromCollection function will be called
+
+    console.log('end test video link');
+}
+
+function removeVideoFormFromCollection(e) {
+    // get the previous sibling of the button
+
+    const sibling = e.currentTarget.previousSibling;
+    // remove the parent element from the DOM
+    sibling.remove();
+
+    // also remove the button itself
+    e.currentTarget.remove();
 }
 
 // add the click event listener to the link
 addVideoLinkLink.addEventListener("click", addVideoFormToCollection)
 
-console.log(addVideoLinkLink);
+// console.log(addVideoLinkLink);
+
+});

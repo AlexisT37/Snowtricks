@@ -6,19 +6,6 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mb-4 d-flex justify-content-between">
-		<a href="{{ path('app_home') }}">Home</a>
-		{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
-			<a href="{{ path('app_register') }}" class="btn btn-secondary">Register</a>
-		{% endif %}
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
-			<a href="{{ path('create') }}" class="btn btn-success">Create New Trick</a>
-		{% endif %}
-	</div>
-
-
 	<h2>{{ trick.name }}</h2>
 <p>Description {{ trick.description }}</p>
 <p>Créé le {{ trick.createdAt|date('d/m/Y H:i') }}</p>

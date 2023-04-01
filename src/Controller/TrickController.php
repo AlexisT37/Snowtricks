@@ -21,7 +21,7 @@ use DateTime;
 
 class TrickController extends AbstractController
 {
-    #[Route('/viewdetail/{slug}', name: 'viewdetail')]
+    #[Route('/viewdetail/{slug}', name: 'viewdetail', methods: ['GET'])]
     public function viewdetail(Trick $trick, Request $request, TrickRepository $trickRepository): Response
     {
         $comments = $trick->getComments();
@@ -46,7 +46,7 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'create')]
+    #[Route('/create', name: 'create', methods: ['GET', 'POST'])]
     public function create(EntityManagerInterface $entityManager, Request $request, LoggerInterface $logger): Response
     {
         $logger->info('Test log message');
@@ -62,6 +62,8 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // dd($form->getData());
 
             foreach ($trick->getImageLinks() as $imageLink) {
                 $imageLink->setTrick($trick);
@@ -98,6 +100,33 @@ class TrickController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                // dd($form->getData());
+
+                
+
+                foreach ($trick->getImageLinks() as $imageLink) {
+                    $imageLink->setTrick($trick);
+                    $entityManager->persist($imageLink);
+                }
+                foreach ($trick->getVideoLinks() as $videoLink) {
+                    $videoLink->setTrick($trick);
+                    $entityManager->persist($videoLink);
+                }
+
+                // if one of the image links has been set to null or is an empty string, remove it from the collection
+                foreach ($trick->getImageLinks() as $imageLink) {
+                    if ($imageLink->getContent() == null || $imageLink->getContent() == '') {
+                        $trick->removeImageLink($imageLink);
+                    }
+                }
+
+                // if one of the video links has been set to null or is an empty string, remove it from the collection
+                foreach ($trick->getVideoLinks() as $videoLink) {
+                    if ($videoLink->getContent() == null || $videoLink->getContent() == '') {
+                        $trick->removeVideoLink($videoLink);
+                    }
+                }
+
                 $entityManager->persist($trick);
                 $entityManager->flush();
 
@@ -113,7 +142,7 @@ class TrickController extends AbstractController
         }
     }
 
-    #[Route('/addcomment/{slug}', name: 'addcomment')]
+    #[Route('/addcomment/{slug}', name: 'addcomment', methods: ['GET', 'POST'])]
     public function addcomment(TrickRepository $trickRepository, string $slug, Request $request, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);
@@ -135,7 +164,7 @@ class TrickController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{slug}', name: 'delete')]
+    #[Route('/delete/{slug}', name: 'delete', methods: ['GET', 'POST'])]
     public function delete(TrickRepository $trickRepository, string $slug, EntityManagerInterface $entityManager): Response
     {
         $trick = $trickRepository->findOneBy(['slug' => $slug]);

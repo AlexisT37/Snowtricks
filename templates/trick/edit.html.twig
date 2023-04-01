@@ -3,9 +3,19 @@
 {% block title %}Edit your trick{% endblock %}
 
 {% block body %}
-    <h1>Edit trick</h1>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Save Changes">
-    {{ form_end(form) }}
+    <div class="edit-form m-5">
+        <h1 id="createEdit">Edit trick</h1>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <ul class="imagelinks" data-prototype="&lt;div&gt;&lt;label class=&quot; required&quot;&gt;__name__&lt;/label&gt;&lt;div id=&quot;trick_imagelinks___name__&quot;&gt;&lt;div&gt;&lt;label for=&quot;trick_imagelinks___name___content&quot; class=&quot; required&quot;&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;trick_imagelinks___name___content&quot; name=&quot;trick[imagelinks][__name__][content]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" data-index="0">
+            </ul>
+            <ul class="videolinks" data-prototype="&lt;div&gt;&lt;label class=&quot; required&quot;&gt;__name__&lt;/label&gt;&lt;div id=&quot;trick_videolinks___name__&quot;&gt;&lt;div&gt;&lt;label for=&quot;trick_videolinks___name___content&quot; class=&quot; required&quot;&gt;Name&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;trick_videolinks___name___content&quot; name=&quot;trick[videolinks][__name__][content]&quot; required=&quot;required&quot; maxlength=&quot;255&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" data-index="0">
+            </ul>
+            <input type="submit" value="Save Changes">
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
+
+{# {% block javascripts %}
+    {{ parent() }}
+{% endblock %} #}
