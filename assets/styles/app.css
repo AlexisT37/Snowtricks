@@ -136,3 +136,10 @@ main-title:hover {
     text-decoration: none;
     color: #007bff !important;
 }
+
+.text-viewdetail{
+    color: #ffffff;
+}
+h2.text-viewdetail{
+    color: #ffffff;
+}

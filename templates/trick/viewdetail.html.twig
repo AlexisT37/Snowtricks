@@ -6,69 +6,66 @@
 {% endblock %}
 
 {% block body %}
-	<h2>{{ trick.name }}</h2>
-<p>Description {{ trick.description }}</p>
-<p>Créé le {{ trick.createdAt|date('d/m/Y H:i') }}</p>
-<p>Dernière modification le {{ trick.modifiedAt|date('d/m/Y H:i') }}</p>
-<p>Groupe du trick : {{ trick.trickgroup }}</p>
-<p>
-    Par
-    {{ trick.creator.fullname }}</p>
-<p>Images</p>
-{% for image in trick.imageLinks %}
-    <img src="{{ image.getContent(300) }}" alt="a trick image" width="300" height="200">
-{% endfor %}
-
-<p>Videos</p>
-{% if trick.videoLinks is not empty %}
-    {% for video in trick.videoLinks %}
-        {% if 'youtube' in video.content and 'youtu.be' not in video.content %}
-            <iframe width="300" height="200" src="{{ video.content|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        {% endif %}
-    {% endfor %}
-{% else %}
-    <p>There are no videos for this trick</p>
-{% endif %}
-
-
-	{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
-		{% if app.user.verified == 1 %}
-			<a href="{{ path('edit', {'slug': trick.slug}) }}">
-				<ion-icon name="pencil-outline"></ion-icon>
-			</a>
-
-			<a href="{{ path('delete', {'slug': trick.slug}) }}">
-				<ion-icon name="trash-outline"></ion-icon>
-			</a>
+	<div class="p-2 m-2">
+		<h2 class="text-viewdetail">{{ trick.name }}</h2>
+		<p class="text-viewdetail">Description {{ trick.description }}</p>
+		<p class="text-viewdetail">Créé le {{ trick.createdAt|date('d/m/Y H:i') }}</p>
+		<p class="text-viewdetail">Dernière modification le {{ trick.modifiedAt|date('d/m/Y H:i') }}</p>
+		<p class="text-viewdetail">Groupe du trick : {{ trick.trickgroup }}</p>
+		<p class="text-viewdetail">
+			Par
+			{{ trick.creator.fullname }}</p>
+		<p class="text-viewdetail">Images</p>
+		{% for image in trick.imageLinks %}
+			<img src="{{ image.getContent(300) }}" alt="a trick image" width="300" height="200">
+		{% endfor %}
+		
+		<p class="text-viewdetail">Videos</p>
+		{% if trick.videoLinks is not empty %}
+			{% for video in trick.videoLinks %}
+				{% if 'youtube' in video.content and 'youtu.be' not in video.content %}
+					<iframe width="300" height="200" src="{{ video.content|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				{% endif %}
+			{% endfor %}
 		{% else %}
-			<p>Your account is not active so you cannot edit or delete your tricks !</p>
+			<p class="text-viewdetail">There are no videos for this trick</p>
 		{% endif %}
-	{% endif %}
-
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		{% if app.user.verified == 1 %}
-			<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
-		{% else %}
-			<p>You need to verify your account to add a comment</p>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
+			{% if app.user.verified == 1 %}
+				<a href="{{ path('edit', {'slug': trick.slug}) }}">
+					<ion-icon name="pencil-outline"></ion-icon>
+				</a>
+				<a href="{{ path('delete', {'slug': trick.slug}) }}">
+					<ion-icon name="trash-outline"></ion-icon>
+				</a>
+			{% else %}
+				<p class="text-viewdetail">Your account is not active so you cannot edit or delete your tricks !</p>
+			{% endif %}
 		{% endif %}
-	{% endif %}
-
-	<h3>Comments</h3>
-	{% for comment in comments %}
-		<div class="card mb-3">
-			<div class="card-body">
-				<h5 class="card-title"> Par {{ comment.authorname.fullname }}</h5>
-				<img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="40" height="40">
-				<p class="card-text">{{ comment.content }}</p>
-				<p class="card-text"><small class="text-muted">Posté le {{ comment.createdAt|date('d/m/Y H:i') }}</small></p>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			{% if app.user.verified == 1 %}
+				<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
+			{% else %}
+				<p class="text-viewdetail">You need to verify your account to add a comment</p>
+			{% endif %}
+		{% endif %}
+		<h3 class="text-viewdetail">Comments</h3>
+		{% for comment in comments %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title"> Par {{ comment.authorname.fullname }}</h5>
+					<img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="40" height="40">
+					<p class="card-text">{{ comment.content }}</p>
+					<p class="card-text"><small class="text-muted">Posté le {{ comment.createdAt|date('d/m/Y H:i') }}</small></p>
+				</div>
 			</div>
-		</div>
-	{% else %}
-		<p>There is no comment for this trick</p>
-	{% endfor %}
+		{% else %}
+			<p class="text-viewdetail">There is no comment for this trick</p>
+		{% endfor %}
+			{{ pagerfanta(pagerfanta) }}
+	</div>
 
-		{{ pagerfanta(pagerfanta) }}
-
+{% include 'footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
