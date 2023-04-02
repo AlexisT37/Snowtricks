@@ -53,9 +53,9 @@
 		{% for comment in comments %}
 			<div class="card mb-3">
 				<div class="card-body">
-					<h5 class="card-title"> Par {{ comment.authorname.fullname }}</h5>
+					<h5 class="card-text card-text-comment"> Par {{ comment.authorname.fullname }}</h5>
 					<img src="{{ comment.authorname.getPhoto(300) }}" alt="image of the creator" width="40" height="40">
-					<p class="card-text">{{ comment.content }}</p>
+					<p class="card-text-comment">{{ comment.content }}</p>
 					<p class="card-text"><small class="text-muted">Posté le {{ comment.createdAt|date('d/m/Y H:i') }}</small></p>
 				</div>
 			</div>

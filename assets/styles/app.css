@@ -57,6 +57,11 @@ h1 {
     font-weight: bold;
 }
 
+/* comment in view detail */
+.card-text-comment {
+    color: #6c757d;
+}
+
 /* Button success */
 .btn-success, .btn-success:hover {
     background-color: #28a745;
@@ -133,8 +138,8 @@ button {
 }
 
 
-/* Login container */
-.login-container {
+/* horizontal container */
+.horizontal-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,7 +168,7 @@ button {
 
 /* Media query for small screens (smartphones) */
 @media (max-width: 576px) {
-    .login-container {
+    .horizontal-container {
         padding: 1em 0.5em;
     }
 }

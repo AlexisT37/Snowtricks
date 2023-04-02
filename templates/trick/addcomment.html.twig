@@ -6,10 +6,14 @@
 {% block body %}
 
 {# minimalistic form #}
-<div class="m-2 p-2">
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+<div class="vertical-container">
+    <div class="horizontal-container">
+        <div class="m-2 p-2">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 </div>
 {% include 'footer.html.twig' %}
 {% endblock %}
