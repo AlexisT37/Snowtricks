@@ -1,5 +1,33 @@
+/* Variables */
+:root {
+    --main-font: 'Roboto', sans-serif;
+    --main-color: #ffffff;
+    --link-color: #ffffff;
+    --link-hover-color: #0056b3;
+    --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Common styles */
+body, .pagerfanta, .footer-text, .pagination__item, .add_imagelink_list, .add_videolink_list, form label, ul.imagelinks label, ul.videolinks label {
+    font-family: var(--main-font);
+    color: var(--main-color);
+}
+
+a, .pagerfanta .previous a, .pagerfanta .next a, .pagerfanta .first a, .pagerfanta .last a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover, .pagerfanta a:hover {
+    color: var(--link-hover-color);
+}
+
+.text-shadow {
+    text-shadow: var(--text-shadow);
+}
+
+/* Body */
 body {
-    font-family: 'Roboto', sans-serif;
     background-image: url("../images/wooden.avif");
     background-color: #f5f5f5;
     background-repeat: repeat;
@@ -8,6 +36,7 @@ body {
     background-size: 30em 30em;
 }
 
+/* Image background */
 .image-background {
     background-image: url("../images/snowboard-background.jpg");
     background-color: #f5f5f5;
@@ -18,26 +47,18 @@ body {
     height: 40em;
 }
 
-.message_top_home {
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+/* Message top home */
+.message_top_home, h1 {
+    color: var(--main-color);
+    text-shadow: var(--text-shadow);
 }
 
 h1 {
     font-weight: bold;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-a {
-    color: #007bff;
-}
-
-a:hover {
-    color: #0056b3;
-}
-
-.btn-success {
+/* Button success */
+.btn-success, .btn-success:hover {
     background-color: #28a745;
     border-color: #28a745;
 }
@@ -47,6 +68,7 @@ a:hover {
     border-color: #218838;
 }
 
+/* Trick grid */
 .trick-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -59,72 +81,42 @@ a:hover {
     text-align: center;
 }
 
-.pagerfanta, .footer-text, .pagination__item, .add_imagelink_list, .add_videolink_list {
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff;
-}
-
-form label {
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff;
-  }
-
-  ul.imagelinks label,
-  ul.videolinks label {
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff;
-  }
-
+/* Pagerfanta */
 .pagerfanta .current {
-    color: #fff;
-    background-color: #007bff;
+    color: var(--main-color);
+    background-color: var(--link-color);
 }
 
-/* Change the color of the previous and next buttons */
-.pagerfanta .previous a,
-.pagerfanta .next a {
-    color: #007bff;
-}
-
-/* Change the color for the first and last buttons */
-.pagerfanta .first a,
-.pagerfanta .last a {
-    color: #007bff;
-}
-
-/* Change the color of the page numbers when hovering */
-.pagerfanta a:hover {
-    color: #0056b3;
-    text-decoration: none;
-}
-
+/* Footer */
 .footer {
     text-align: center;
     padding: 20px;
-    }
+}
 
 .footer-text {
     margin-top: 1em;
 }
 
+/* Labels and buttons */
 label {
     margin-right: 1em;
 }
 
 button {
     margin: 1em;
-    color : #000000;
+    color: #000000;
     border-radius: 0.5em;
 }
 
-.main-title {
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff;
+/* Main title */
+.main-title, h2.text-viewdetail {
+    font-family: var(--main-font);
+    color: var(--main-color);
 }
 
-main-title:hover {
+.main-title:hover, .main-title-link:hover {
     text-decoration: none;
-    color: #007bff !important;
+    color: var(--link-hover-color) !important;
 }
 
 .main-title-link {
@@ -132,14 +124,46 @@ main-title:hover {
 }
 
 .main-title-link:hover {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    text-decoration: none;
-    color: #007bff !important;
+    text-shadow: var(--text-shadow);
 }
 
-.text-viewdetail{
-    color: #ffffff;
+/* Text view detail */
+.text-viewdetail {
+    color: var(--main-color);
 }
-h2.text-viewdetail{
-    color: #ffffff;
+
+
+/* Login container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 1em;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* For centering items horizontally */
+    justify-content: center; /* For centering items vertically */
+    height: 100vh; /* Set the container height to the full viewport height */
+}
+
+/* Media query for small screens (smartphones) */
+@media (max-width: 576px) {
+    .login-container {
+        padding: 1em 0.5em;
+    }
 }
