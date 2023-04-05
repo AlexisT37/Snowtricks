@@ -167,11 +167,11 @@ button {
 }
 
 
-#arrow-down {
+#arrow-down, #arrow-up {
     float: right;
 }
 
-#arrow-down ion-icon {
+#arrow-down ion-icon, #arrow-up ion-icon {
     font-size: 2em;
 }
 

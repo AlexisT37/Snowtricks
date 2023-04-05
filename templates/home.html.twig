@@ -65,6 +65,11 @@
     </div>
 </section>
 
+<div class="arrow-up hidden" id="arrow-up">
+    <a href="#main-title-snowtricks" ><ion-icon name="arrow-up-outline"></a>
+    </ion-icon>
+</div>
+
 	{{ pagerfanta(pagerfanta) }}
 
 {% include 'footer.html.twig' %}
@@ -76,7 +81,9 @@
     document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('arrow-down').addEventListener('click', function() {
         const trickGrid = document.getElementById('tricks');
+        const arrowUp = document.getElementById('arrow-up');
         trickGrid.classList.remove('hidden');
+        arrowUp.classList.remove('hidden');
         trickGrid.scrollIntoView({ behavior: 'smooth' });
     });
 });
