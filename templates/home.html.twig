@@ -30,34 +30,40 @@
 
 <section class="image-background mx-5 my-2"></section>
 
-
-<div class="trick-grid mx-5">
-    {% for trick in pagerfanta %}
-        {% if trick.deleted == 0 %}
-            <div class="trick-container">
-                <a class="text-decoration-none message_top_home" href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
-                {# show below only if the user is the creator of the trick #}
-                {% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
-                    <a href="{{ path('edit', {'slug': trick.slug}) }}">
-                        <ion-icon name="pencil-outline"></ion-icon>
-                    </a>
-
-                    <a href="#" onclick="if (confirm('Are you sure you want to delete this trick?')) { window.location.href='{{ path('delete', {'slug': trick.slug}) }}'; }">
-                        <ion-icon name="trash-outline"></ion-icon>
-                    </a>
-                {% endif %}
-                {% set firstImage = trick.imageLinks|first %}
-                {% if firstImage is not same as(false) %}
-                    {% if firstImage is defined %}
-                        <img src="{{ firstImage.getContent(300) }}" alt="a trick image" width="300" height="200">
-                    {% else %}
-                        <p>There are no images for this trick</p>
-                    {% endif %}
-                {% endif %}
-            </div>
-        {% endif %}
-    {% endfor %}
+<div class="arrow-down" id="arrow-down">
+    <a href="#tricks" ><ion-icon name="arrow-down-outline"></a>
+    </ion-icon>
 </div>
+
+<section id="tricks" class="hidden">
+    <div class="trick-grid mx-5" id="trick-grid">
+        {% for trick in pagerfanta %}
+            {% if trick.deleted == 0 %}
+                <div class="trick-container">
+                    <a class="text-decoration-none message_top_home" href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
+                    {# show below only if the user is the creator of the trick #}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
+                        <a href="{{ path('edit', {'slug': trick.slug}) }}">
+                            <ion-icon name="pencil-outline"></ion-icon>
+                        </a>
+    
+                        <a href="#" onclick="if (confirm('Are you sure you want to delete this trick?')) { window.location.href='{{ path('delete', {'slug': trick.slug}) }}'; }">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </a>
+                    {% endif %}
+                    {% set firstImage = trick.imageLinks|first %}
+                    {% if firstImage is not same as(false) %}
+                        {% if firstImage is defined %}
+                            <img src="{{ firstImage.getContent(300) }}" alt="a trick image" width="300" height="200">
+                        {% else %}
+                            <p>There are no images for this trick</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
 
 	{{ pagerfanta(pagerfanta) }}
 
@@ -66,4 +72,14 @@
 
 {% block javascripts %}
 	<script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('arrow-down').addEventListener('click', function() {
+        const trickGrid = document.getElementById('tricks');
+        trickGrid.classList.remove('hidden');
+        trickGrid.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+</script>
 {% endblock %}

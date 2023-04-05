@@ -166,6 +166,20 @@ button {
     height: 100vh; /* Set the container height to the full viewport height */
 }
 
+
+#arrow-down {
+    float: right;
+}
+
+#arrow-down ion-icon {
+    font-size: 2em;
+}
+
+.hidden {
+    display: none;
+}
+
+
 /* Media query for small screens (smartphones) */
 @media (max-width: 576px) {
     .horizontal-container {
