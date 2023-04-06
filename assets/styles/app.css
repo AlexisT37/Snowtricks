@@ -74,7 +74,7 @@ body {
 
 /* Position the catchphrase container to cover the whole section */
 .catchphrase-container {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -82,6 +82,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+    
 }
 
 /* Style the catchphrase text */
