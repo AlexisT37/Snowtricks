@@ -55,6 +55,16 @@ body {
         background-position: center;
         height: 40em;
     }
+
+    .trick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trick-container {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }
 
 
