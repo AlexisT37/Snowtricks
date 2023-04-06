@@ -26,6 +26,11 @@ a:hover, .pagerfanta a:hover {
     text-shadow: var(--text-shadow);
 }
 
+nav.pagination span {
+    margin: 0.1em;
+}
+
+
 /* Body */
 body {
     background-image: url("../images/wooden.avif");
