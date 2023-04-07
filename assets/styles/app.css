@@ -48,7 +48,6 @@ body {
 /* Image background */
 .image-background {
     background-image: url("../images/snowboard-background.jpg");
-    /* background-color: #f5f5f5; */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -74,9 +73,9 @@ body {
 
 /* Style the catchphrase text */
 .catchphrase {
-    font-size: 2em; /* Adjust the font size as needed */
-    color: #ffffff; /* Set the text color */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a text shadow for better readability */
+    font-size: 2em;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -158,12 +157,11 @@ h1 {
 
 @media (max-width: 768px) {
     .icon-size {
-        font-size: 3em; /* Adjust this value as needed */
+        font-size: 3em;
     }
 
    
     .icon-create-trick {
-        /* coror green for the ion icon */
         color: #218838;
     }
 }
@@ -243,9 +241,9 @@ button {
 .vertical-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* For centering items horizontally */
-    justify-content: center; /* For centering items vertically */
-    height: 100vh; /* Set the container height to the full viewport height */
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 
@@ -267,10 +265,9 @@ button {
     position: fixed;
     bottom: 0;
     z-index: 9999;
-    left: 50%; /* Add this line */
-    transform: translateX(-50%); /* Add this line */
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #ffffff;
-    /* border radius 0.5 em upper right and upper left */
     border-radius:  0.5em 0.5em 0 0;
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -285,11 +282,7 @@ button {
 }
 
 .icon-size:hover {
-    /* shadow */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    /* more pronounced box shadow */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    /* border radius 0.5 em */
     border-radius:  0.1em;
 }
 
