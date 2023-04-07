@@ -52,25 +52,7 @@ body {
     height: 40em;
 }
 
-/* Media query for small screens (smartphones) */
-@media (max-width: 576px) {
-    .image-background {
-        background-image: url("../images/snowphone.jpg");
-        background-size: inherit;
-        background-position: center;
-        height: 40em;
-    }
 
-    .trick-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .trick-container {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-}
 
 /* Position the catchphrase container to cover the whole section */
 .catchphrase-container {
@@ -133,7 +115,7 @@ h1 {
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #5b98c6;
+    background-color: #32638e;
     padding: 1em;
     padding-bottom: 2.4em;
     border-radius: 0.5em;
@@ -144,6 +126,42 @@ h1 {
     width: 100%; 
     height: 100%;
     object-fit: cover;
+}
+
+/* Media query for small screens (smartphones) */
+@media (max-width: 576px) {
+    .image-background {
+        background-image: url("../images/snowphone.jpg");
+        background-size: inherit;
+        background-position: center;
+        height: 40em;
+    }
+
+    .trick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trick-container {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        background-color: #80BFE2;
+    }
+    
+}
+
+
+
+@media (max-width: 768px) {
+    .icon-size {
+        font-size: 3em; /* Adjust this value as needed */
+    }
+
+   
+    .icon-create-trick {
+        /* coror green for the ion icon */
+        color: #218838;
+    }
 }
 
 /* Pagerfanta */
