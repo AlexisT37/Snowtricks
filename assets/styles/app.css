@@ -293,9 +293,7 @@ button {
     }
 
     .main-title-container {
-        /* align-items: center; */
             justify-content: center;
-            /* display: flex; */
             left: 50%;
             position: absolute;
             right: 50%;
