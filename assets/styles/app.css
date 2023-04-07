@@ -233,6 +233,18 @@ h2.text-viewdetail {
     font-size: 2em;
 }
 
+#arrow-up {
+    position: fixed;
+    bottom: 120px;
+    right: 10px;
+}
+
+#arrow-down {
+    position: fixed;
+    bottom: 200px;
+    right: 10px;
+}
+
 .hidden {
     display: none;
 }
