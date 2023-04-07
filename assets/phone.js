@@ -19,6 +19,7 @@ function getScreenWidth() {
     for (var i = 0; i < hiddenOnMobile.length; i++) {
         hiddenOnMobile[i].setAttribute('disabled', 'false');
         hiddenOnMobile[i].style.display = 'flex';
+        
       }
     
     }
