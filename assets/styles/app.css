@@ -289,15 +289,6 @@ h2.text-viewdetail {
         padding: 1em 0.5em;
     }
 
-    .main-title-container {
-        justify-content: center;
-        left: 50%;
-        position: absolute;
-        right: 50%;
-        top: 10%;
-        z-index: 2;
-    }
-
     .icon-size {
         font-size: 3em;
     }

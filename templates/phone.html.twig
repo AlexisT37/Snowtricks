@@ -27,7 +27,7 @@
         {% endif %}
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            
+            <a href="{{ path('app_home') }}" class="d-md-none text-primary"><ion-icon class="icon-size" name="home-outline"></ion-icon></a>
             <a href="{{ path('app_logout') }}" class="d-md-none text-primary"><ion-icon class="icon-size" name="log-out-outline"></ion-icon></a>
             {% if app.user.verified == 1 %}
                 
