@@ -291,4 +291,14 @@ button {
     .horizontal-container {
         padding: 1em 0.5em;
     }
+
+    .main-title-container {
+        /* align-items: center; */
+            justify-content: center;
+            /* display: flex; */
+            left: 50%;
+            position: absolute;
+            right: 50%;
+            top: 10%;
+    }
 }
