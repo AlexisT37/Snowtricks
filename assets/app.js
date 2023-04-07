@@ -12,3 +12,4 @@ import './styles/app.css';
 import './bootstrap';
 import './Form/ImageLink';
 import './Form/VideoLink';
+import './phone';

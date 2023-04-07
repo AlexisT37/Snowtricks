@@ -7,6 +7,10 @@
     --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.hidden-on-mobile {
+    display: flex;
+}
+
 /* Common styles */
 body, .pagerfanta, .footer-text, .pagination__item, .add_imagelink_list, .add_videolink_list, form label, ul.imagelinks label, ul.videolinks label {
     font-family: var(--main-font);
@@ -257,6 +261,37 @@ button {
     display: none;
 }
 
+.icons-bottom {
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    left: 50%; /* Add this line */
+    transform: translateX(-50%); /* Add this line */
+    background-color: #ffffff;
+    /* border radius 0.5 em upper right and upper left */
+    border-radius:  0.5em 0.5em 0 0;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icons-bottom-inside {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.icon-size:hover {
+    /* shadow */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    /* more pronounced box shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* border radius 0.5 em */
+    border-radius:  0.1em;
+}
 
 /* Media query for small screens (smartphones) */
 @media (max-width: 576px) {
