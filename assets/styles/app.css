@@ -132,7 +132,7 @@ h1 {
 }
 
 /* Media query for small screens (smartphones) */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .image-background {
         background-image: url("../images/snowphone.jpg");
         background-size: inherit;
@@ -287,7 +287,7 @@ button {
 }
 
 /* Media query for small screens (smartphones) */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .horizontal-container {
         padding: 1em 0.5em;
     }
