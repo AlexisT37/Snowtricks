@@ -12,17 +12,30 @@
 }
 
 /* Common styles */
-body, .pagerfanta, .footer-text, .pagination__item, .add_imagelink_list, .add_videolink_list, form label, ul.imagelinks label, ul.videolinks label {
+body,
+.pagerfanta,
+.footer-text,
+.pagination__item,
+.add_imagelink_list,
+.add_videolink_list,
+form label,
+ul.imagelinks label,
+ul.videolinks label {
     font-family: var(--main-font);
     color: var(--main-color);
 }
 
-a, .pagerfanta .previous a, .pagerfanta .next a, .pagerfanta .first a, .pagerfanta .last a {
+a,
+.pagerfanta .previous a,
+.pagerfanta .next a,
+.pagerfanta .first a,
+.pagerfanta .last a {
     color: var(--link-color);
     text-decoration: none;
 }
 
-a:hover, .pagerfanta a:hover {
+a:hover,
+.pagerfanta a:hover {
     color: var(--link-hover-color);
 }
 
@@ -33,7 +46,6 @@ a:hover, .pagerfanta a:hover {
 nav.pagination span {
     margin: 0.1em;
 }
-
 
 /* Body */
 body {
@@ -55,8 +67,6 @@ body {
     height: 40em;
 }
 
-
-
 /* Position the catchphrase container to cover the whole section */
 .catchphrase-container {
     position: relative;
@@ -68,7 +78,6 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1;
-    
 }
 
 /* Style the catchphrase text */
@@ -78,9 +87,9 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-
 /* Message top home */
-.message_top_home, h1 {
+.message_top_home,
+h1 {
     color: var(--main-color);
     text-shadow: var(--text-shadow);
 }
@@ -89,13 +98,14 @@ h1 {
     font-weight: bold;
 }
 
-/* comment in view detail */
+/* Comment in view detail */
 .card-text-comment {
     color: #6c757d;
 }
 
 /* Button success */
-.btn-success, .btn-success:hover {
+.btn-success,
+.btn-success:hover {
     background-color: #28a745;
     border-color: #28a745;
 }
@@ -126,45 +136,11 @@ h1 {
 }
 
 .trick-container img {
-    width: 100%; 
+    width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* Media query for small screens (smartphones) */
-@media (max-width: 768px) {
-    .image-background {
-        background-image: url("../images/snowphone.jpg");
-        background-size: inherit;
-        background-position: center;
-        height: 40em;
-    }
-
-    .trick-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .trick-container {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        background-color: #80BFE2;
-    }
-    
-}
-
-
-
-@media (max-width: 768px) {
-    .icon-size {
-        font-size: 3em;
-    }
-
-   
-    .icon-create-trick {
-        color: #218838;
-    }
-}
 
 /* Pagerfanta */
 .pagerfanta .current {
@@ -194,12 +170,14 @@ button {
 }
 
 /* Main title */
-.main-title, h2.text-viewdetail {
+.main-title,
+h2.text-viewdetail {
     font-family: var(--main-font);
     color: var(--main-color);
 }
 
-.main-title:hover, .main-title-link:hover {
+.main-title:hover,
+.main-title-link:hover {
     text-decoration: none;
     color: var(--link-hover-color) !important;
 }
@@ -217,8 +195,7 @@ button {
     color: var(--main-color);
 }
 
-
-/* horizontal container */
+/* Horizontal container */
 .horizontal-container {
     display: flex;
     flex-direction: column;
@@ -246,12 +223,13 @@ button {
     height: 100vh;
 }
 
-
-#arrow-down, #arrow-up {
+#arrow-down,
+#arrow-up {
     float: right;
 }
 
-#arrow-down ion-icon, #arrow-up ion-icon {
+#arrow-down ion-icon,
+#arrow-up ion-icon {
     font-size: 2em;
 }
 
@@ -268,7 +246,7 @@ button {
     left: 50%;
     transform: translateX(-50%);
     background-color: #ffffff;
-    border-radius:  0.5em 0.5em 0 0;
+    border-radius: 0.5em 0.5em 0 0;
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -283,20 +261,48 @@ button {
 
 .icon-size:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    border-radius:  0.1em;
+    border-radius: 0.1em;
 }
 
 /* Media query for small screens (smartphones) */
 @media (max-width: 768px) {
+
+    .image-background {
+        background-image: url("../images/snowphone.jpg");
+        background-size: inherit;
+        background-position: center;
+        height: 40em;
+    }
+
+    .trick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trick-container {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        background-color: #80BFE2;
+    }
+
     .horizontal-container {
         padding: 1em 0.5em;
     }
 
     .main-title-container {
-            justify-content: center;
-            left: 50%;
-            position: absolute;
-            right: 50%;
-            top: 10%;
+        justify-content: center;
+        left: 50%;
+        position: absolute;
+        right: 50%;
+        top: 10%;
+        z-index: 2;
+    }
+
+    .icon-size {
+        font-size: 3em;
+    }
+
+    .icon-create-trick {
+        color: #218838;
     }
 }
