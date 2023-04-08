@@ -318,6 +318,13 @@ h2.text-viewdetail {
         color: #218838;
     }
 
+        .card-actions {
+            margin-top: 1em;
+            right: 33em;
+            bottom: 8em;
+            position: fixed;
+        }
+
 }
     
 @media (min-width: 769px) {
