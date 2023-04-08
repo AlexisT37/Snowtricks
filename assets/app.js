@@ -13,3 +13,4 @@ import './bootstrap';
 import './Form/ImageLink';
 import './Form/VideoLink';
 import './phone';
+import './load-more';

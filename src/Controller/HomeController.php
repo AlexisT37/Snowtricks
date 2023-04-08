@@ -29,7 +29,7 @@ class HomeController extends AbstractController
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
             $request->query->get('page', 1),
-            10
+            20
         );
 
 

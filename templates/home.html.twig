@@ -44,7 +44,7 @@
     <div class="trick-grid mx-5" id="trick-grid">
         {% for trick in pagerfanta %}
             {% if trick.deleted == 0 %}
-                <div class="trick-container">
+                <div class="card-item hide trick-container">
                     <a class="text-decoration-none message_top_home" href="{{ path('viewdetail', {'slug': trick.slug}) }}">{{ trick.name }}</a>
                     {# show below only if the user is the creator of the trick #}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
@@ -75,7 +75,12 @@
     </ion-icon>
 </div>
 
-	<div class="m-4">{{ pagerfanta(pagerfanta) }}</div>
+
+    <div class="card-actions">
+        <button id="load-more" class="btn btn-primary">Load more</button>
+    </div>
+
+    
 
 {% include 'footer.html.twig' %}
 {% include 'phone.html.twig' %}

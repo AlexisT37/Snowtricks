@@ -276,6 +276,14 @@ h2.text-viewdetail {
     border-radius: 0.1em;
 }
 
+.card-actions {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+}
+
 /* Media query for small screens (smartphones) */
 @media (max-width: 768px) {
 
