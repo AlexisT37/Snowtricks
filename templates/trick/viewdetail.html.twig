@@ -15,21 +15,28 @@
 		<p class="text-viewdetail">
 			Par
 			{{ trick.creator.fullname }}</p>
-		<p class="text-viewdetail">Images</p>
-		{% for image in trick.imageLinks %}
-			<img src="{{ image.getContent(300) }}" alt="a trick image" width="300" height="200">
-		{% endfor %}
 		
-		<p class="text-viewdetail">Videos</p>
-		{% if trick.videoLinks is not empty %}
-			{% for video in trick.videoLinks %}
-				{% if 'youtube' in video.content and 'youtu.be' not in video.content %}
-					<iframe width="300" height="200" src="{{ video.content|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				{% endif %}
+		{# button to show the media #}
+		<button id='button-show-media'class="btn btn-primary" type="button">
+			Show media
+		</button>
+		<div class="media-container hidden">
+			<p class="text-viewdetail">Images</p>
+			{% for image in trick.imageLinks %}
+				<img src="{{ image.getContent(300) }}" alt="a trick image" width="300" height="200">
 			{% endfor %}
-		{% else %}
-			<p class="text-viewdetail">There are no videos for this trick</p>
-		{% endif %}
+			
+			<p class="text-viewdetail">Videos</p>
+			{% if trick.videoLinks is not empty %}
+				{% for video in trick.videoLinks %}
+					{% if 'youtube' in video.content and 'youtu.be' not in video.content %}
+						<iframe width="300" height="200" src="{{ video.content|replace({'watch?v=': 'embed/'}) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				<p class="text-viewdetail">There are no videos for this trick</p>
+			{% endif %}
+		</div>
 		{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
 			{% if app.user.verified == 1 %}
 				<a href="{{ path('edit', {'slug': trick.slug}) }}">
