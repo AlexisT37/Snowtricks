@@ -325,6 +325,11 @@ h2.text-viewdetail {
             position: fixed;
         }
 
+    #trick-grid {
+        box-sizing: border-box;
+        padding-bottom: 5em;
+    }
+
 }
     
 @media (min-width: 769px) {
