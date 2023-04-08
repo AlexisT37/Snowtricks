@@ -63,8 +63,6 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // dd($form->getData());
-
             foreach ($trick->getImageLinks() as $imageLink) {
                 $imageLink->setTrick($trick);
             }
