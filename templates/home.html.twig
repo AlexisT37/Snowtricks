@@ -76,7 +76,7 @@
 </div>
 
 
-    <div class="card-actions">
+    <div id="load-more-container"class="card-actions hidden">
         <button id="load-more" class="btn btn-primary">Load more</button>
     </div>
 
@@ -93,8 +93,10 @@
     document.getElementById('arrow-down').addEventListener('click', function() {
         const trickGrid = document.getElementById('tricks');
         const arrowUp = document.getElementById('arrow-up');
+        const loadMoreContainer = document.getElementById('load-more-container');
         trickGrid.classList.remove('hidden');
         arrowUp.classList.remove('hidden');
+        loadMoreContainer.classList.remove('hidden');
         trickGrid.scrollIntoView({ behavior: 'smooth' });
     });
 });

@@ -246,7 +246,7 @@ h2.text-viewdetail {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .icons-bottom {
@@ -283,6 +283,7 @@ h2.text-viewdetail {
         align-items: center;
         justify-content: center;
 }
+
 
 /* Media query for small screens (smartphones) */
 @media (max-width: 768px) {
