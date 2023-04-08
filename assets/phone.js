@@ -1,19 +1,24 @@
 console.log('phone.js loaded');
 var hiddenOnMobile = document.getElementsByClassName('hidden-on-mobile');
 
-var buttonShowMedia = document.getElementById('button-show-media');
+document.addEventListener('DOMContentLoaded', function() {
+  var buttonShowMedia = document.getElementById('button-show-media');
 
-buttonShowMedia.addEventListener('click', function() {
-  var mediaContainer = document.getElementsByClassName('media-container')[0];
-  if (mediaContainer.classList.contains('hidden')) {
-    mediaContainer.classList.remove('hidden');
-    buttonShowMedia.innerHTML = 'Hide Media';
+  if (buttonShowMedia) {
+    buttonShowMedia.addEventListener('click', function() {
+      var mediaContainer = document.getElementsByClassName('media-container')[0];
+      if (mediaContainer.classList.contains('hidden')) {
+        mediaContainer.classList.remove('hidden');
+        buttonShowMedia.innerHTML = 'Hide Media';
+      } else {
+        mediaContainer.classList.add('hidden');
+        buttonShowMedia.innerHTML = 'Show Media';
+      }
+    });
   } else {
-    mediaContainer.classList.add('hidden');
-    buttonShowMedia.innerHTML = 'Show Media';
+    console.log("button-show-media element not found");
   }
 });
-
 
 
 // Function to get the current screen width

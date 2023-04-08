@@ -10,7 +10,9 @@
 .hidden-on-mobile {
     display: flex;
 }
-
+li {
+    color: #ffffff;
+}
 /* Common styles */
 body,
 .pagerfanta,
