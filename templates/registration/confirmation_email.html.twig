@@ -1,19 +1,19 @@
 {% block body %}
 <div class="m-2 p-2">
-	<h1>Hi! Please confirm your email!</h1>
+	<h1>{{'hi_confirm_email' | trans}}</h1>
 	
 	<p>
-		Please confirm your email address by clicking the following link:
+		{{'click_email_link' | trans}}
 		<br><br>
-		<a href="{{ signedUrl|raw }}">Confirm my Email</a>.
+		<a href="{{ signedUrl|raw }}">{{'click_email_link' | trans}}</a>.
 	
 	
-				This link will expire in
+				{{'link_will_expire' | trans}}
 		{{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 	</p>
 	
 	<p>
-		Cheers!
+		{{'email_cheers' | trans}}
 	</p>
 </div>
 {% include 'footer.html.twig' %}

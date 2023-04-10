@@ -34,7 +34,7 @@
 					{% endif %}
 				{% endfor %}
 			{% else %}
-				<p class="text-viewdetail">There are no videos for this trick</p>
+				<p class="text-viewdetail">{{'no_video_for_this_trick' | trans}}</p>
 			{% endif %}
 		</div>
 		{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
@@ -46,17 +46,17 @@
 					<ion-icon name="trash-outline"></ion-icon>
 				</a>
 			{% else %}
-				<p class="text-viewdetail">Your account is not active so you cannot edit or delete your tricks !</p>
+				<p class="text-viewdetail">{{'account_not_active' | trans}}</p>
 			{% endif %}
 		{% endif %}
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			{% if app.user.verified == 1 %}
-				<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">Add a comment</a>
+				<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">{{'add_comment' | trans}}</a>
 			{% else %}
-				<p class="text-viewdetail">You need to verify your account to add a comment</p>
+				<p class="text-viewdetail">{{'nedd_verify_account_to_comment' | trans}}</p>
 			{% endif %}
 		{% endif %}
-		<h3 class="text-viewdetail">Comments</h3>
+		<h3 class="text-viewdetail">{{'comments_title' | trans}}</h3>
 		{% for comment in comments %}
 			<div class="card mb-3">
 				<div class="card-body">
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		{% else %}
-			<p class="text-viewdetail">There is no comment for this trick</p>
+			<p class="text-viewdetail">{{'no_comment_for_this_trick' | trans}}</p>
 		{% endfor %}
 			{{ pagerfanta(pagerfanta) }}
 	</div>

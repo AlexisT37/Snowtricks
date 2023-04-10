@@ -34,7 +34,7 @@
                 <a href="{{ path('create') }}" class="d-md-none text-primary"><ion-icon class="icon-size icon-create-trick" name="create-outline"></ion-icon></a>
 
             {% else %}
-                <p>You are not verified, you can't create a trick, check your email !</p>
+                <p>{{'not_verified_check_email' | trans}}</p>
             {% endif %}
         {% endif %}
     </div>

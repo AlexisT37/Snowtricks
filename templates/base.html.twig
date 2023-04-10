@@ -23,20 +23,20 @@
     <div class="ms-auto mx-2 p-2">
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             <!-- Show buttons on medium and larger screens -->
-            <a href="{{ path('app_home') }} " class="btn btn-primary d-none d-md-inline-block">Home</a>
-            <a href="{{ path('app_login') }}" class="btn btn-primary d-none d-md-inline-block">Login</a>
-            <a href="{{ path('app_register') }}" class="btn btn-secondary d-none d-md-inline-block">Register</a>
+            <a href="{{ path('app_home') }} " class="btn btn-primary d-none d-md-inline-block">{{'home' | trans}}</a>
+            <a href="{{ path('app_login') }}" class="btn btn-primary d-none d-md-inline-block">{{'login' | trans}}</a>
+            <a href="{{ path('app_register') }}" class="btn btn-secondary d-none d-md-inline-block">{{'register' | trans}}</a>
            
 
         {% endif %}
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path('app_home') }} " class="btn btn-primary d-none d-md-inline-block">Home</a>
-            <a href="{{ path('app_logout') }}" class="btn btn-primary d-none d-md-inline-block">Logout</a>
+            <a href="{{ path('app_home') }} " class="btn btn-primary d-none d-md-inline-block">{{'home' | trans}}</a>
+            <a href="{{ path('app_logout') }}" class="btn btn-primary d-none d-md-inline-block">{{'logout' | trans}}</a>
             {% if app.user.verified == 1 %}
-                <a href="{{ path('create') }}" class="btn btn-success d-none d-md-inline-block">Create New Trick</a>
+                <a href="{{ path('create') }}" class="btn btn-success d-none d-md-inline-block">{{'create_new_trick' | trans}}</a>
             {% else %}
-                <p>You are not verified, you can't create a trick, check your email !</p>
+                <p>{{'not_verified_check_email' | trans}}</p>
             {% endif %}
         {% endif %}
     </div>
