@@ -16,9 +16,13 @@ class TrickType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+        ->add('name', null, [
+            'label' => 'trick_form.name',
+        ])
             ->add('description')
-            ->add('trickgroup')
+            ->add('trickgroup', null, [
+                'label' => 'trick_form.trick_group',
+            ])
             ->add('imagelinks', CollectionType::class, [
                 'entry_type' => ImageLinkType::class,
                 // No label for the image links
@@ -37,6 +41,7 @@ class TrickType extends AbstractType
                         'minMessage' => 'You must specify at least one element.',
                     ]),
                 ],
+                'label' => 'trick_form.image_link',
             ])
             ->add('videolinks', CollectionType::class, [
                 'entry_type' => VideoLinkType::class,
@@ -54,6 +59,7 @@ class TrickType extends AbstractType
                         'minMessage' => 'You must specify at least one element.',
                     ]),
                 ],
+                'label' => 'trick_form.video_link',
             ])
             
         ;

@@ -35,3 +35,8 @@ registration_form:
     fullname: Fullname
     password: Password
     agree_terms: I agree to the terms and conditions
+trick_form:
+    name: Name
+    trick_group: Trick group
+    image_link: Image link
+    video_link: Video link

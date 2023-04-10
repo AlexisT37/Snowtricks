@@ -35,3 +35,8 @@ registration_form:
     fullname: Nom complet
     password: Mot de passe
     agree_terms: J'accepte les conditions générales d'utilisation
+trick_form:
+    name: Nom
+    trick_group: Groupe de figure
+    image_link: Lien d'image
+    video_link: Lien de vidéo

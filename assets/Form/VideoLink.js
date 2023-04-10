@@ -8,7 +8,7 @@ addVideoLinkLink.classList.add('add_videolink_list')
 // add set a fake href to the link
 addVideoLinkLink.href='#'
 // add a text to the link
-addVideoLinkLink.innerText='Add a videolink'
+addVideoLinkLink.innerText="Ajouter un lien de vidéo"
 // adds a data attribute to the link
 addVideoLinkLink.dataset.collectionHolderClass='videolinks'
 
@@ -48,11 +48,9 @@ if(collectionHolder) {
                 // increment the index of the collection so that the next item will have a different index
                 collectionHolder.dataset.index++;
 
-                console.log('add video link');
-
                 // create a button below the link with an id of coucou
                 const removelinkbutton = document.createElement('button');
-                removelinkbutton.innerHTML = "Remove link";
+                removelinkbutton.innerHTML = "Retirer le lien";
                 // add the button as a sibling of the link
                 e.currentTarget.parentNode.appendChild(removelinkbutton);
 

@@ -28,7 +28,7 @@ addImageLinkLink.classList.add('add_imagelink_list')
 // add set a fake href to the link
 addImageLinkLink.href='#'
 // add a text to the link
-addImageLinkLink.innerText='Add a imagelink'
+addImageLinkLink.innerText="Ajouter un lien d'image"
 // adds a data attribute to the link
 addImageLinkLink.dataset.collectionHolderClass='imagelinks'
 
@@ -83,7 +83,7 @@ const addImageFormToCollectionEdit = (e) => {
     collectionHolder.dataset.index = startIndex + 1;
 
     const removelinkbutton = document.createElement('button');
-    removelinkbutton.innerHTML = "Remove link";
+    removelinkbutton.innerHTML = "Retirer le lien";
     e.currentTarget.parentNode.appendChild(removelinkbutton);
 
     removelinkbutton.addEventListener("click", removeImageFormFromCollection)
@@ -122,7 +122,7 @@ const addImageFormToCollectionCreate = (e) => {
 
     // create a button below the link with an id of coucou
     const removelinkbutton = document.createElement('button');
-    removelinkbutton.innerHTML = "Remove link";
+    removelinkbutton.innerHTML = "Retirer le lien";
     // add the button as a sibling of the link
     e.currentTarget.parentNode.appendChild(removelinkbutton);
 
