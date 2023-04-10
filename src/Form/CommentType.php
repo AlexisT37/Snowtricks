@@ -13,11 +13,16 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content')
-            ->add('submit', SubmitType::class, [
-                'label' => 'Comment',
+            ->add('content', null, [
+                'label' => 'Contenu',
                 'attr' => [
-                    'class' => 'btn btn-primary',
+                    'class' => 'form-control m-2 p-2',
+                ],
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Valider',
+                'attr' => [
+                    'class' => 'btn btn-primary m-2 p-2',
                 ],
             ]);
 

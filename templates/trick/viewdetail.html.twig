@@ -63,9 +63,9 @@
 				<a href="{{ path('edit', {'slug': trick.slug}) }}">
 					<ion-icon class="delete-edit-icon" name="pencil-outline"></ion-icon>
 				</a>
-				<a href="{{ path('delete', {'slug': trick.slug}) }}">
-					<ion-icon class="delete-edit-icon" name="trash-outline"></ion-icon>
-				</a>
+				<a href="#" onclick="if (confirm('Are you sure you want to delete this trick?')) { window.location.href='{{ path('delete', {'slug': trick.slug}) }}'; }">
+                            <ion-icon class="delete-edit-icon" name="trash-outline"></ion-icon>
+                        </a>
 			{% else %}
 				<p class="text-viewdetail">{{'account_not_active' | trans}}</p>
 			{% endif %}

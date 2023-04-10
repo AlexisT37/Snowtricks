@@ -1,9 +1,13 @@
 {# twig template with a form to add a comment #}
 {% extends 'base.html.twig' %}
 
-{% block title %} Une figure de snowboard | {{ parent() }}{% endblock %}
+{% block title %} Ajouter un commentaire | {{ parent() }}{% endblock %}
 
 {% block body %}
+
+{# a h1 title with nice bootstrap classes #}
+<h1 class="text-center text-white p-2">Ajouter un commentaire</h1>
+
 
 {# minimalistic form #}
 <div class="vertical-container">
@@ -16,4 +20,5 @@
     </div>
 </div>
 {% include 'footer.html.twig' %}
+{% include 'phone.html.twig' %}
 {% endblock %}
