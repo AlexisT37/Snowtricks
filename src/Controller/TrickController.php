@@ -16,8 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Psr\Log\LoggerInterface;
 
-// use datetime
-use DateTime;
 
 class TrickController extends AbstractController
 {
@@ -79,7 +77,7 @@ class TrickController extends AbstractController
                 $this->addFlash('error', $e->getMessage());
             }
         
-            $this->addFlash('success', 'Trick created !');
+            $this->addFlash('success', 'Votre figure a bien été créée !');
 
             return $this->redirectToRoute('app_home');
         }
@@ -132,7 +130,7 @@ class TrickController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            $this->addFlash('error', 'You can only edit your own tricks !');
+            $this->addFlash('error', 'Vous ne pouvez modifier que vos propres figures !');
             return $this->redirectToRoute('edit', ['slug' => $trick->getSlug()]);
         }
     }
@@ -168,7 +166,7 @@ class TrickController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
         } else {
-            $this->addFlash('error', 'You can only delete your own tricks !');
+            $this->addFlash('error', 'Vous ne pouvez supprimer que vos propres figures !');
         }
 
         return $this->redirectToRoute('app_home');

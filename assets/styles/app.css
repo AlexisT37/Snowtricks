@@ -286,6 +286,14 @@ h2.text-viewdetail {
         justify-content: center;
 }
 
+.delete-edit-icon {
+    font-size: 1.75em;
+    color: #ffffff;
+}
+
+.delete-edit-icon:hover {
+    color: var(--link-hover-color);
+}
 
 /* Media query for small screens (smartphones) */
 @media (max-width: 768px) {

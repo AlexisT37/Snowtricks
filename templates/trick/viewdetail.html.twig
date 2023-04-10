@@ -37,18 +37,6 @@
 				<p class="text-viewdetail">{{'no_video_for_this_trick' | trans}}</p>
 			{% endif %}
 		</div>
-		{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
-			{% if app.user.verified == 1 %}
-				<a href="{{ path('edit', {'slug': trick.slug}) }}">
-					<ion-icon name="pencil-outline"></ion-icon>
-				</a>
-				<a href="{{ path('delete', {'slug': trick.slug}) }}">
-					<ion-icon name="trash-outline"></ion-icon>
-				</a>
-			{% else %}
-				<p class="text-viewdetail">{{'account_not_active' | trans}}</p>
-			{% endif %}
-		{% endif %}
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			{% if app.user.verified == 1 %}
 				<a href="{{ path('addcomment', {'slug': trick.slug}) }}" class="btn btn-success">{{'add_comment' | trans}}</a>
@@ -70,6 +58,18 @@
 			<p class="text-viewdetail">{{'no_comment_for_this_trick' | trans}}</p>
 		{% endfor %}
 			{{ pagerfanta(pagerfanta) }}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') and trick.creator == app.user %}
+			{% if app.user.verified == 1 %}
+				<a href="{{ path('edit', {'slug': trick.slug}) }}">
+					<ion-icon class="delete-edit-icon" name="pencil-outline"></ion-icon>
+				</a>
+				<a href="{{ path('delete', {'slug': trick.slug}) }}">
+					<ion-icon class="delete-edit-icon" name="trash-outline"></ion-icon>
+				</a>
+			{% else %}
+				<p class="text-viewdetail">{{'account_not_active' | trans}}</p>
+			{% endif %}
+		{% endif %}
 	</div>
 
 {% include 'footer.html.twig' %}
