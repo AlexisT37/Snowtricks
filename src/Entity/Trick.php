@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TrickRepository::class)]
-#[UniqueEntity(fields: ['name'], message: 'This name is already used')]
+#[UniqueEntity(fields: ['name'], message: 'Ce nom est déjà utilisé !')]
 class Trick
 {
     #[ORM\Id]
