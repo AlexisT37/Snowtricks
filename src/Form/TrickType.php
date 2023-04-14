@@ -18,6 +18,9 @@ class TrickType extends AbstractType
         $builder
         ->add('name', null, [
             'label' => 'trick_form.name',
+            'attr' => [
+                'class' => 'm-2',
+            ],
         ])
             ->add('description')
             ->add('trickgroup', null, [
