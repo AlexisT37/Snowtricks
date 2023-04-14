@@ -12,7 +12,7 @@ const createEdit = document.querySelector('#createEdit');
 var edit = false;
     if (createEdit) {
         // if inner html of createEdit = 'Edit your trick' then print edit
-        if (createEdit.innerHTML === 'Edit trick') {
+        if (createEdit.innerHTML === 'Edit trick' || createEdit.innerHTML === 'Modifier la figure') {
             console.log('edit');
             edit = true;
         } else {
