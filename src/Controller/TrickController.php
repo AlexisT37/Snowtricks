@@ -16,8 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Psr\Log\LoggerInterface;
 
-// use datetime
-use DateTime;
 
 class TrickController extends AbstractController
 {
@@ -63,8 +61,6 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // dd($form->getData());
-
             foreach ($trick->getImageLinks() as $imageLink) {
                 $imageLink->setTrick($trick);
             }
@@ -81,7 +77,7 @@ class TrickController extends AbstractController
                 $this->addFlash('error', $e->getMessage());
             }
         
-            $this->addFlash('success', 'Trick created !');
+            $this->addFlash('success', 'Votre figure a bien été créée !');
 
             return $this->redirectToRoute('app_home');
         }
@@ -100,9 +96,6 @@ class TrickController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                // dd($form->getData());
-
-                
 
                 foreach ($trick->getImageLinks() as $imageLink) {
                     $imageLink->setTrick($trick);
@@ -115,14 +108,14 @@ class TrickController extends AbstractController
 
                 // if one of the image links has been set to null or is an empty string, remove it from the collection
                 foreach ($trick->getImageLinks() as $imageLink) {
-                    if ($imageLink->getContent() == null || $imageLink->getContent() == '') {
+                    if ($imageLink->getContent() === null || $imageLink->getContent() === '') {
                         $trick->removeImageLink($imageLink);
                     }
                 }
 
                 // if one of the video links has been set to null or is an empty string, remove it from the collection
                 foreach ($trick->getVideoLinks() as $videoLink) {
-                    if ($videoLink->getContent() == null || $videoLink->getContent() == '') {
+                    if ($videoLink->getContent() === null || $videoLink->getContent() === '') {
                         $trick->removeVideoLink($videoLink);
                     }
                 }
@@ -137,7 +130,7 @@ class TrickController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
-            $this->addFlash('error', 'You can only edit your own tricks !');
+            $this->addFlash('error', 'Vous ne pouvez modifier que vos propres figures !');
             return $this->redirectToRoute('edit', ['slug' => $trick->getSlug()]);
         }
     }
@@ -173,7 +166,7 @@ class TrickController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
         } else {
-            $this->addFlash('error', 'You can only delete your own tricks !');
+            $this->addFlash('error', 'Vous ne pouvez supprimer que vos propres figures !');
         }
 
         return $this->redirectToRoute('app_home');

@@ -6,22 +6,21 @@ console.log('ImageLink.js loaded');
 
 console.log('test before create');
 
-const toto = document.querySelector('#createEdit');
-console.log('toto');
-console.log(toto);
+const createEdit = document.querySelector('#createEdit');
+
 
 var edit = false;
+    if (createEdit) {
+        // if inner html of createEdit = 'Edit your trick' then print edit
+        if (createEdit.innerHTML === 'Edit trick') {
+            console.log('edit');
+            edit = true;
+        } else {
+            console.log('create');
 
-// if inner html of toto = 'Edit your trick' then print edit
-if (toto.innerHTML === 'Edit trick') {
-    console.log('edit');
-    edit = true;
-} else {
-    console.log('create');
-    
-}
-console.log('test after create');
-
+        }
+        console.log('test after create');
+    }
 // create a new link
 const addImageLinkLink = document.createElement('a')
 // add a css class to the link
@@ -29,7 +28,7 @@ addImageLinkLink.classList.add('add_imagelink_list')
 // add set a fake href to the link
 addImageLinkLink.href='#'
 // add a text to the link
-addImageLinkLink.innerText='Add a imagelink'
+addImageLinkLink.innerText="Ajouter un lien d'image"
 // adds a data attribute to the link
 addImageLinkLink.dataset.collectionHolderClass='imagelinks'
 
@@ -38,8 +37,11 @@ const newLinkLi = document.createElement('li').append(addImageLinkLink)
 
 // get the ul element
 const collectionHolder = document.querySelector('ul.imagelinks')
+
+if(collectionHolder) {
 // append the new list item to the ul element
-collectionHolder.appendChild(addImageLinkLink)
+collectionHolder.appendChild(addImageLinkLink);
+}
 
 // add a click event listener to the link, the function will be called when the link is clicked, it takes an event as a parameter
 const addImageFormToCollectionEdit = (e) => {
@@ -81,7 +83,7 @@ const addImageFormToCollectionEdit = (e) => {
     collectionHolder.dataset.index = startIndex + 1;
 
     const removelinkbutton = document.createElement('button');
-    removelinkbutton.innerHTML = "Remove link";
+    removelinkbutton.innerHTML = "Retirer le lien";
     e.currentTarget.parentNode.appendChild(removelinkbutton);
 
     removelinkbutton.addEventListener("click", removeImageFormFromCollection)
@@ -120,7 +122,7 @@ const addImageFormToCollectionCreate = (e) => {
 
     // create a button below the link with an id of coucou
     const removelinkbutton = document.createElement('button');
-    removelinkbutton.innerHTML = "Remove link";
+    removelinkbutton.innerHTML = "Retirer le lien";
     // add the button as a sibling of the link
     e.currentTarget.parentNode.appendChild(removelinkbutton);
 

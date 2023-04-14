@@ -17,7 +17,9 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('fullname')
+        ->add('fullname', null, [
+            'label' => 'registration_form.fullname',
+        ])
             ->add('photo')
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
@@ -27,6 +29,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                'label' => 'registration_form.agree_terms',
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -44,6 +47,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'label' => 'registration_form.password',
             ])
         ;
     }
