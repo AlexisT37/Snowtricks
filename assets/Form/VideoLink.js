@@ -50,6 +50,7 @@ if(collectionHolder) {
 
                 // create a button below the link with an id of coucou
                 const removelinkbutton = document.createElement('button');
+                removelinkbutton.classList.add('btn', 'btn-danger', 'mt-2');
                 removelinkbutton.innerHTML = "Retirer le lien";
                 // add the button as a sibling of the link
                 e.currentTarget.parentNode.appendChild(removelinkbutton);
