@@ -32,6 +32,7 @@ email_address_verified: Your email address has been verified.
 can_only_edit_own_tricks: You can only edit your own tricks !
 can_only_delete_own_tricks: You can only delete your own tricks !
 edit_trick: Edit trick
+save_changes: Save changes
 registration_form:
     fullname: Fullname
     password: Password

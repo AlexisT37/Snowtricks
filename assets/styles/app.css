@@ -298,6 +298,10 @@ h2.text-viewdetail {
 /* Media query for small screens (smartphones) */
 @media (max-width: 768px) {
 
+    #button-show-media{
+        margin-bottom: 1em;
+    }
+
     .image-background {
         background-image: url("../images/snowphone.jpg");
         background-size: inherit;

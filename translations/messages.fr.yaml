@@ -32,6 +32,7 @@ email_address_verified: Votre adresse email a été vérifiée.
 can_only_edit_own_tricks: Vous ne pouvez modifier que vos propres figures !
 can_only_delete_own_tricks: Vous ne pouvez supprimer que vos propres figures !
 edit_trick: Modifier la figure
+save_changes: "Enregistrer les modifications"
 registration_form:
     fullname: Nom complet
     password: Mot de passe

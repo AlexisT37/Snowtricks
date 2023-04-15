@@ -12,7 +12,7 @@ const createEdit = document.querySelector('#createEdit');
 var edit = false;
     if (createEdit) {
         // if inner html of createEdit = 'Edit your trick' then print edit
-        if (createEdit.innerHTML === 'Edit trick') {
+        if (createEdit.innerHTML === 'Edit trick' || createEdit.innerHTML === 'Modifier la figure') {
             console.log('edit');
             edit = true;
         } else {
@@ -122,6 +122,8 @@ const addImageFormToCollectionCreate = (e) => {
 
     // create a button below the link with an id of coucou
     const removelinkbutton = document.createElement('button');
+    // add the class btn btn-danger to the button
+    removelinkbutton.classList.add('btn', 'btn-danger', 'mt-2');
     removelinkbutton.innerHTML = "Retirer le lien";
     // add the button as a sibling of the link
     e.currentTarget.parentNode.appendChild(removelinkbutton);
