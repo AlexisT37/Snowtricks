@@ -1,0 +1,19 @@
+@startuml trick
+
+class Trick {
+  name: string
+  description: string
+  group: string
+  imageLink: string
+  videoLink: string
+  author: string
+  dateOfCreation: date
+  dateOfLastModified: date
+  discussionChannel: string
+  create(name: string, description: string, group: string, imageLink: string, videoLink: string): void
+  modify(name: string, description: string, group: string, imageLink: string, videoLink: string): void
+  delete(): void
+
+}
+
+@enduml
