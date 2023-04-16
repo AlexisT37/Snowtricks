@@ -5,11 +5,12 @@ Une webapp basée sur [Docker](https://www.docker.com/) pour le framework web [S
 ## Pour commencer
 
 1. [installer Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Exécutez `docker compose build --pull --no-cache` pour construire des images.
-3. Lancez `docker compose up -d` pour démarrer les conteneurs.
-4. Lancez `docker ps` pour trouver l'ID du conteneur PHP.
-4. Lancez `docker exec e5172a3ff42a php bin/console doctrine:fixtures:load --no-interaction` pour charger les données de démonstration, où `e5172a3ff42a` est l'ID du conteneur PHP, pensez à remplacer par votre ID !
-4. Ouvrez `localhost` dans votre navigateur favori et [acceptez le certificat TLS auto-généré](https://stackoverflow.com/a/15076602/1352334) ou cliquez sur "accepter les risques et continuer".
+2. Rendez-vous dans un dossier vide de votre choix.
+3. Ouvrez un terminal (vérifiez que vous êtes dans le dossier que vous venez de créer) et exécutez la commande suivante :
+`git clone https://github.com/AlexisT37/Snowtricks.git .`
+Cela va cloner le projet dans le dossier.
+4. Exécutez la commande `./start.ps1`. Cela va démarrer un script qui va démarrer les conteneurs Docker et installer les dépendances du projet ainsi que les fixtures.
+5. Changez la ligne MAILER_DSN dans le fichier .env (ou créez un fichier .env.local) pour que l'envoi d'email fonctionne. Vous pouvez créer un compte sur [Mailtrap](https://mailtrap.io/) pour tester l'envoi d'email. 
 
 
 ## Caractéristiques
