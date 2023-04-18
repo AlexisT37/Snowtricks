@@ -3,24 +3,19 @@
 actor User
 actor Database
 
-usecase Controller
+usecase FillOutForm as "Fill out form"
+usecase CheckTrickName as "Check if trick name exists"
+usecase ValidateLinks as "Check if at least one image and video links"
+usecase SetAttributes as "Set attributes\nand create entry"
+usecase DisplayValidation as "Display validation message"
 
-' class Trick {
-'   name: string
-'   description: string
-'   group: string
-'   imageLink: string
-'   videoLink: string
-'   author: string
-'   dateOfCreation: date
-'   dateOfLastModified: date
-'   discussionChannel: string
-' }
 
-User -> Controller: Fills out form
-
-Controller --> Database: Set attributes \n and create entry
-
-Database --> User: Validation message
+User --> FillOutForm
+FillOutForm --> CheckTrickName : Controller
+CheckTrickName --> ValidateLinks : Controller
+ValidateLinks --> SetAttributes : Controller
+SetAttributes --> Database
+Database --> DisplayValidation
+DisplayValidation --> User
 
 @enduml

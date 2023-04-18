@@ -6,7 +6,7 @@ usecase Login
 
 User -> Login: Fills out form
 
-Login -> Database: Check if email is in database
+Login -> Database: Check if email already exists in database
 
 Database -> Login: Send error if email doesn't exist
 
