@@ -4,6 +4,9 @@ Une webapp basée sur [Docker](https://www.docker.com/) pour le framework web [S
 
 ## Pour commencer
 
+### Prérequis
+Pour éviter les messages d'erreur lors du déploiment de l'application, vérifiez que votre php est bien en version 8.2. Pensez surtout à la version de php de vos logiciels d'environnement de développement tels que laragon, wamp, xampp, etc. Si votre projet ne se déploie pas ou si vous avez des erreurs, vérifiez que vous êtes bien en PHP 8.2. et au besoin désactivez les logiciels d'environnement de développement le temps de lancer le projet.
+
 1. [installer Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 2. Rendez-vous dans un dossier vide de votre choix.
 3. Ouvrez un terminal (vérifiez que vous êtes dans le dossier que vous venez de créer) et exécutez la commande suivante :
