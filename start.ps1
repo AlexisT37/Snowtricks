@@ -1,5 +1,9 @@
 # start.ps1
 
+composer install
+yarn install
+yarn build
+
 docker-compose up -d
 
 $containerId = docker-compose ps -q php
