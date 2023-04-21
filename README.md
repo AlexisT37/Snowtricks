@@ -7,13 +7,15 @@ Une webapp basée sur [Docker](https://www.docker.com/) pour le framework web [S
 ### Prérequis
 Pour éviter les messages d'erreur lors du déploiment de l'application, vérifiez que votre php est bien en version 8.2. Pensez surtout à la version de php de vos logiciels d'environnement de développement tels que laragon, wamp, xampp, etc. Si votre projet ne se déploie pas ou si vous avez des erreurs, vérifiez que vous êtes bien en PHP 8.2. et au besoin désactivez les logiciels d'environnement de développement le temps de lancer le projet.
 
-1. [installer Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
+1. Installez [Docker Compose](https://docs.docker.com/compose/install/) (v2.10+) ou [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 2. Rendez-vous dans un dossier vide de votre choix.
 3. Ouvrez un terminal (vérifiez que vous êtes dans le dossier que vous venez de créer) et exécutez la commande suivante :
-`git clone https://github.com/AlexisT37/Snowtricks.git .`
+`git clone https://github.com/AlexisT37/Snowtricks.git .` (le point à la fin est important).
 Cela va cloner le projet dans le dossier.
 4. Exécutez la commande `./start.ps1`. Cela va démarrer un script qui va démarrer les conteneurs Docker et installer les dépendances du projet ainsi que les fixtures.
-5. Changez la ligne MAILER_DSN dans le fichier .env (ou créez un fichier .env.local) pour que l'envoi d'email fonctionne. Vous pouvez créer un compte sur [Mailtrap](https://mailtrap.io/) pour tester l'envoi d'email. 
+5. Changez la ligne MAILER_DSN dans le fichier .env (ou créez un fichier .env.local) pour que l'envoi d'email fonctionne. Vous pouvez créer un compte sur [Mailtrap](https://mailtrap.io/) pour tester l'envoi d'email.
+6. Connectez-vous à `localhost` sur le navigateur de votre choix. Si vous avez un message d'avertissement, vous aurez forcément une option pour continuer malgré les risques, en cliquant sur cette option, vous serez redirigé vers le site Snowtricks.
+
 
 
 ## Caractéristiques
