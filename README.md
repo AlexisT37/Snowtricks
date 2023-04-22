@@ -12,7 +12,18 @@ Pour éviter les messages d'erreur lors du déploiment de l'application, vérifi
 3. Ouvrez un terminal (vérifiez que vous êtes dans le dossier que vous venez de créer) et exécutez la commande suivante :
 `git clone https://github.com/AlexisT37/Snowtricks.git .` (le point à la fin est important).
 Cela va cloner le projet dans le dossier.
-4. Exécutez la commande `./start.ps1`. Cela va démarrer un script qui va démarrer les conteneurs Docker et installer les dépendances du projet ainsi que les fixtures.
+4. Exécutez la commande `./start.ps1`. Cela va démarrer un script qui va démarrer les conteneurs Docker et installer les dépendances du projet ainsi que les fixtures. Si vous êtes sur Linux, exécutez la commande `./start.sh` à la place. Vous pouvez aussi effectuer les commandes une par une :
+
+`composer install`
+`yarn install`
+`yarn build`
+`docker-compose up -d`
+`docker ps` pour trouver l'id de votre conteneur php, copiez cet id et exécutez les deux commandes suivantes :
+docker exec <iddevotreconteneur> php bin/console doctrine:schema:update --force
+docker exec <iddevotreconteneur> php bin/console doctrine:fixtures:load --no-interaction
+(N'oubliez pas de remplacer <iddevotreconteneur> par l'id de votre conteneur php, n'incluez pas les chevrons <>).
+
+
 5. Changez la ligne MAILER_DSN dans le fichier .env (ou créez un fichier .env.local) pour que l'envoi d'email fonctionne. Vous pouvez créer un compte sur [Mailtrap](https://mailtrap.io/) pour tester l'envoi d'email.
 6. Connectez-vous à `localhost` sur le navigateur de votre choix. Si vous avez un message d'avertissement, vous aurez forcément une option pour continuer malgré les risques, en cliquant sur cette option, vous serez redirigé vers le site Snowtricks.
 
